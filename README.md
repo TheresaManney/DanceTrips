@@ -49,31 +49,31 @@ The scaffold consists of a number of components that fit together in order to ma
 #### Major Components
 
 * [npm](https://www.npmjs.com/) - Package Manager
-  
+
   npm is the equivalent, for Node.js, of Ruby's RubyGems and Bundler projects. Its job is to provide access to a registry of existing open-source software (known as packages) and allow a project to specify which packages it depends upon.
 
   npm can be used on the commandline to perform various tasks, including installing all dependencies, adding new dependencies, and running pre-defined script commands (ala Rake). See the Quick Start section for details on the most relevant commands to use.
 * [Babel](https://babeljs.io/) - JavaScript compiler
-  
+
   Babel's job is to take JavaScript code written in a [newer version of JavaScript](http://babeljs.io/docs/learn-es2015/) (known as ES6 or ES2015) and convert it to equivalent code in an older version of JavaScript (generally ES5) which has more universal support in web browsers.
-  
+
   Until now our curriculum has focused on writing ES5 JavaScript, and we can continue to do so for almost all things. One place where we will be using ES6 syntax is for [JavaScript modules](#what-is-a-javascript-module).
 * [webpack](https://webpack.github.io/) - Module bundler
-  
+
   webpack is a tool for taking multiple JavaScript modules (which we will be creating using the ES6 syntax) and putting them together coherently into a single JavaScript file, because web browsers don't really understand the concept of JavaScript modules (yet). See [What is a JavaScript module?](#what-is-a-javascript-module) FAQ answer for details.
 * [Jasmine](https://jasmine.github.io/) - Testing framework
-  
+
   Jasmine is a testing framework that uses spec-style tests, with a strong influence from RSpec. When we get to the point of including tests for our Backbone projects, this is what we'll use. More guidance on how to write and run tests with Jasmine will be included in the curriculum when we introduce testing.
 * [jQuery](https://jquery.com/) - DOM manipulation & AJAX library
-  
+
   This is the same jQuery that Ada's curriculum has been using up until now. Backbone builds ontop of it rather than re-inventing it.
 * [Underscore](http://underscorejs.org/) - Utility library
-  
+
   Underscore is the kind of library that is almost unique to JavaScript. This is because it provides a wide variety of helpful functions that, in every other modern language, would be built-in. It was written by the creator of Backbone and is used heavily within the implementation of Backbone.
-  
+
   For the Ada curriculum it will mostly be used for the `template()` function in our views (more details on this will be provided when we introduce Backbone views).
 * [Backbone](http://backbonejs.org/) - MVC Library
-  
+
   Backbone is the core library that we will be using when creating the projects in this section of the JavaScript curriculum. It allows for something akin to the MVC pattern from Rails by providing the pieces necessary to create such a design.
 
 #### Scaffold Files And Folders
@@ -97,3 +97,8 @@ The scaffold consists of a number of components that fit together in order to ma
 | [`scaffold/bare`](https://github.com/AdaGold/backbone-baseline/tree/scaffold/bare) | Empty scaffold, with general project structure but no code. |
 | [`scaffold/application`](https://github.com/AdaGold/backbone-baseline/tree/scaffold/application) | Empty application scaffold. This builds on the bare scaffold by adding an `Application` model class and an `ApplicationView` view class. |
 | [`scaffold/rolodex`](https://github.com/AdaGold/backbone-baseline/tree/scaffold/rolodex) | Project scaffold for the Rolodex project. This builds on the Application scaffold by adding classes and static content (HTML and CSS) specific to the Rolodex project. |
+
+
+
+
+> Used https://github.com/AdaGold/backbone-baseline/tree/scaffold/bare and copied everything over from the scaffold/bard branch 

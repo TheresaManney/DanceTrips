@@ -1,9 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
+    <link rel='stylesheet' type='text/css' href='css/_settings.css'>
+    <link rel='stylesheet' type='text/css' href='css/foundation.css'>
+    <link rel='stylesheet' type='text/css' href='css/styles.css'>
+    <title>Swing Trips</title>
   </head>
   <body>
-    <script src="/app.bundle.js" charset="utf-8"></script>
+    <header>
+      <nav>
+      </nav>
+      <h1>Trip Tracker</h1>
+    </header>
+    <main>
+      <section id='sign-up'></section>
+      <section id='login'></section>
+    </main>
+
+    <footer>
+    </footer>
+    <!-- TEMPLATES -->
+    <!-- sign up -->
+    <script id='sign-up-template' type='text/template'>
+      <h4><%- traveler.first_name %></h4>
+    </script>
+    
+    <!-- login  -->
+    <script id='login-template' type='text/template'>
+    </script>
+
+    <script src="/app.bundle.js"></script>
   </body>
 </html>
