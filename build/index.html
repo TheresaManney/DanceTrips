@@ -13,9 +13,35 @@
       </nav>
       <h1>Trip Tracker</h1>
     </header>
-    <main>
-      <section id='sign-up'></section>
-      <section id='login'></section>
+    <main class="row">
+      <section id='sign-up' class="small-11 large-3 medium-3 columns">
+        <h2>Sigup!</h2>
+        <form id="signup-form" class="row">
+          <label class="columns medium-12" for="first-name">First Name: </label>
+            <input type="text" name="first-name" placeholder="First name here plz"> </input>
+          <label class = "columns medium-12" for="last-name">Last Name: </label>
+            <input type="text" name="last-name" placeholder="Last name here plz"></input>
+          <label class="columns medium-12" for="email">Email: </label>
+            <input type="text" name="email" placeholder="janedoe@gmail.com"></input>
+          <label class="columns medium-12" for="password">Password: </label>
+            <input type="password" id="signup-password" name="traveler_password" placeholder="***********"></input>
+          <label class="columns medium-12" for="password">Password Confirmation: </label>
+            <input type="password" id="signup-password-confirmation" name="traveler_password_confirmation" placeholder="***********"></input>
+
+          <button type="submit" id='signup-btn' class="button">Signup</button>
+        </form>
+      </section>
+
+      <section id='login' class="small-11 large-3 medium-3 columns">
+        <h2>Login!</h2>
+        <form id="login-form" class="row">
+          <label class="columns medium-12" for="email">Email: </label>
+            <input type="text" name="email" placeholder="janedoe@gmail.com"></input>
+          <label class="columns medium-12" for="password">Password: </label>
+            <input type="password" id="login-password" name="traveler_password" placeholder="***********"></input>
+          <button type="submit" id='login-btn' class="button">Login</button>
+        </form>
+      </section>
     </main>
 
     <footer>
@@ -23,9 +49,9 @@
     <!-- TEMPLATES -->
     <!-- sign up -->
     <script id='sign-up-template' type='text/template'>
-      <h4><%- traveler.first_name %></h4>
+      <!-- <h4><%- traveler.first_name %></h4> -->
     </script>
-    
+
     <!-- login  -->
     <script id='login-template' type='text/template'>
     </script>
