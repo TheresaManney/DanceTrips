@@ -29,6 +29,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "babel-polyfill": "^6.16.0"
+    "babel-polyfill": "^6.16.0",
+    "jwt-simple": "^0.5.1"
   }
 }

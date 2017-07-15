@@ -14,9 +14,13 @@ var TravelerView = Backbone.View.extend({
     'click #signin-btn' : 'newTraveler'
   },
   returningTraveler: function() {
+    event.preventDefault();
     console.log('returningTraveler clicked');
   },
   newTraveler: function() {
+    event.preventDefault();
     console.log('newTraveler clicked');
   }
 });
+
+export default TravelerView;
