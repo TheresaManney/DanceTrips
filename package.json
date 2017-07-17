@@ -1,19 +1,19 @@
 {
   "name": "backbone-baseline",
   "version": "1.0.0",
-  "description": "Ada's baseline for Backbone.js projects using jQuery, webpack, babel, and jasmine",
+  "description": "",
   "main": "./bin/app.bundle.js",
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server",
     "test": "jasmine"
   },
-  "author": "Ada Developers Academy <contact@adadevelopersacademy.org>",
-  "license": "MIT",
-  "repository": "AdaGold/backbone-baseline",
+  "author": "",
+  "license": "",
+  "repository": "",
   "bugs": {
-    "url": "https://github.com/AdaGold/backbone-baseline/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/AdaGold/backbone-baseline#readme",
+  "homepage": "",
   "devDependencies": {
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",

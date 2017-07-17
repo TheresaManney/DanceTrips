@@ -37,8 +37,8 @@ const LoginView = Backbone.View.extend({
     console.log("loginView, loginTraveler button");
     var loginEmail = this.$("#loginEmail").val();
     var loginPassword = this.$("#loginPassword").val();
-    console.log(loginEmail);
-    console.log(loginPassword);
+    // console.log(loginEmail);
+    // console.log(loginPassword);
     var formDetails = {
       auth: {
         email: loginEmail,
@@ -49,10 +49,21 @@ const LoginView = Backbone.View.extend({
     loginTraveler.url = "http://localhost:3000/traveler_token";
     loginTraveler.save(formDetails,  {
       success: function(data) {
-        console.log(loginTraveler);
-        console.log(loginTraveler.attributes.jwt);
+        // console.log(loginTraveler);
+        // console.log(loginTraveler.attributes.jwt);
         console.log("token created");
+        // set localStorage
+        window.localStorage.setItem("Authorization", loginTraveler.attributes.jwt);
+        console.log(localStorage.getItem("Authorization"));
 
+        // var backboneSync = Backbone.sync;
+        // Backbone.sync = function(method, model, options) {
+        //   options.headers = {
+        //     'Authorization': 'Bearer ' + loginTraveler.attributes.jwt
+        //   };
+        //   backboneSync(method, model, options);
+        //   console.log(backboneSync(method, model, options));
+        // };
       },
       error: function(data) {
         console.log("token creation failed");
