@@ -6,9 +6,6 @@ var Traveler = Backbone.Model.extend({
     last_name: '',
     email: ''
     // password: ''
-  },
-  url: function() {
-   return 'http://localhost:3000/travelers';
   }
 });
 

@@ -4,6 +4,8 @@ import $ from 'jquery';
 
 import Login from '../models/login.js';
 import Traveler from '../models/traveler.js';
+import TravelerList from '../collections/traveler_list.js';
+import TravelerListView from './traveler_list_view.js';
 
 const LoginView = Backbone.View.extend({
   initialize: function(params) {
@@ -18,14 +20,18 @@ const LoginView = Backbone.View.extend({
     console.log(this);
     // var that = this;
     // this.model.each(function(login) {
-      // var loginView = new LoginView({
-      //   model: login,
-      //   template: that.template
-      // });
+    //   var loginView = new LoginView({
+    //     model: login,
+    //     template: that.template
+    //   });
+    //   that.$('#login-view').append(loginView.render().$el);
+    // });
       // console.log(login);
       // that.listenTo(loginView, "getLoginForm", that.getLoginForm);
     var compiledTemplate = this.template(this.model.toJSON());
-    this.$el.html(compiledTemplate);
+    // this.$el.html(compiledTemplate);
+    this.$('#login-form').html(compiledTemplate);
+
     return this;
     // });
   },
@@ -55,6 +61,26 @@ const LoginView = Backbone.View.extend({
         // set localStorage
         window.localStorage.setItem("Authorization", loginTraveler.attributes.jwt);
         console.log(localStorage.getItem("Authorization"));
+
+        // instantiate the collection
+        var myTravelerList = new TravelerList();
+        // fetch with special Authorization
+        myTravelerList.fetch( {
+          headers: {'Authorization' : localStorage.getItem("Authorization")},
+          success: function() {
+            var myTravelerListView = new TravelerListView({
+              model: myTravelerList,
+              template: _.template($('#list-travelers-template').html()),
+              el: 'main'
+            });
+            myTravelerListView.render();
+          },
+          error: function() {
+            console.log("Bad auth token...");
+          }
+        });
+        // then possibly render the traveler view
+
 
         // var backboneSync = Backbone.sync;
         // Backbone.sync = function(method, model, options) {
