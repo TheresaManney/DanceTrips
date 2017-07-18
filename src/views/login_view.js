@@ -7,6 +7,10 @@ import Traveler from '../models/traveler.js';
 import TravelerList from '../collections/traveler_list.js';
 import TravelerListView from './traveler_list_view.js';
 
+import Trip from '../models/trip.js';
+import TripList from '../collections/trip_list.js';
+import TripListView from './trip_list_view.js';
+
 const LoginView = Backbone.View.extend({
   initialize: function(params) {
 
@@ -63,17 +67,17 @@ const LoginView = Backbone.View.extend({
         console.log(localStorage.getItem("Authorization"));
 
         // instantiate the collection
-        var myTravelerList = new TravelerList();
+        var myTripList = new TripList();
         // fetch with special Authorization
-        myTravelerList.fetch( {
-          headers: {'Authorization' : localStorage.getItem("Authorization")},
+        myTripList.fetch( {
+          headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
           success: function() {
-            var myTravelerListView = new TravelerListView({
-              model: myTravelerList,
-              template: _.template($('#list-travelers-template').html()),
+            var myTripListView = new TripListView({
+              model: myTripList,
+              template: _.template($('#list-trips-template').html()),
               el: 'main'
             });
-            myTravelerListView.render();
+            myTripListView.render();
           },
           error: function() {
             console.log("Bad auth token...");

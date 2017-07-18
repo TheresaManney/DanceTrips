@@ -33,6 +33,7 @@
         </form>
       </section> -->
         <section id='list-travelers'></section>
+        <section id='list-trips'></section>
       </section>
     </main>
 
@@ -63,6 +64,15 @@
         <%- trips %>
       </p>
     </script>
+
+    <!-- list trips... -->
+    <script id='list-trips-template' type='text/template'>
+      <h2><%- location %></h2>
+      <p>
+        <%- details %>
+      </p>
+    </script>
+
 
     <script src="/app.bundle.js"></script>
   </body>

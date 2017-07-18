@@ -2,10 +2,10 @@ import Backbone from 'backbone';
 import _ from 'underscore';
 import $ from 'jquery';
 
-import Traveler from '../models/traveler.js';
-import TravelerListView from './traveler_list_view.js';
+import Trip from '../models/trip.js';
+import TripListView from './trip_list_view.js';
 
-var TravelerView = Backbone.View.extend({
+var TripView = Backbone.View.extend({
   initialize: function(params) {
     this.template = params.template;
     this.listenTo(this.model, 'change', this.render);
@@ -17,4 +17,4 @@ var TravelerView = Backbone.View.extend({
   }
 });
 
-export default TravelerView;
+export default TripView;
