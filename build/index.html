@@ -9,12 +9,42 @@
   </head>
   <body>
     <header>
-      <nav>
-      </nav>
       <h1>Trip Tracker</h1>
+      <nav>
+<!-- login -->
+<!-- signup -->
+<!-- logout -->
+      </nav>
     </header>
     <main class="row">
       <section id="login-form"></section>
+      <section id='list-travelers'></section>
+      <section class="row">
+        <button class="button columns small-12 medium-2 large-2" id="add-trip-button">Add a Trip!</button>
+      </section>
+      <section id='list-trips'></section>
+      <section id="trip-form"></section>
+      </section>
+    </main>
+
+    <footer></footer>
+
+    <!-- TEMPLATES -->
+
+    <!-- login  -->
+    <script id='login-form-template' type='text/template'>
+        <h2>Login!</h2>
+        <form>
+          <label for="loginEmail">Email: </label>
+            <input type="text" id="loginEmail" placeholder="janedoe@gmail.com"></input>
+          <label class="columns medium-12" for="loginPassword">Password: </label>
+            <input type="password" id="loginPassword" placeholder="***********"></input>
+          <button type="submit" id='loginButton' class="button">Login</button>
+        </form>
+    </script>
+
+    <!-- sign up -->
+    <script id='sign-up-template' type='text/template'>
       <!-- <section id='sign-up' class="small-11 large-3 medium-3 columns">
         <h2>Sigup!</h2>
         <form id="signup-form" class="row">
@@ -32,47 +62,49 @@
           <button type="submit" id='signup-btn' class="button">Signup</button>
         </form>
       </section> -->
-        <section id='list-travelers'></section>
-        <section id='list-trips'></section>
-      </section>
-    </main>
-
-    <footer></footer>
-
-    <!-- TEMPLATES -->
-    <!-- sign up -->
-    <script id='sign-up-template' type='text/template'>
-      <!-- <h4><%- traveler.first_name %></h4> -->
     </script>
-
-    <!-- login  -->
-    <script id='login-form-template' type='text/template'>
-        <h2>Login!</h2>
-        <form>
-          <label for="loginEmail">Email: </label>
-            <input type="text" id="loginEmail" placeholder="janedoe@gmail.com"></input>
-          <label class="columns medium-12" for="loginPassword">Password: </label>
-            <input type="password" id="loginPassword" placeholder="***********"></input>
-          <button type="submit" id='loginButton' class="button">Login</button>
-        </form>
-    </script>
-
-    <!-- list travelers... -->
+    <!-- list travelers -->
     <script id='list-travelers-template' type='text/template'>
+
       <h2><%- email %></h2>
       <p>
         <%- trips %>
       </p>
     </script>
 
-    <!-- list trips... -->
+    <!-- list trips -->
+
     <script id='list-trips-template' type='text/template'>
+
       <h2><%- location %></h2>
       <p>
         <%- details %>
       </p>
     </script>
 
+    <!-- add trips -->
+    <script type="text/template" id="trip-form-template">
+      <form>
+        <!-- <input type="hidden" id="travelerId" name="travelerId" value="this.Value.Id" /> -->
+        <section class="input-group">
+          <label for="tripLocation">Location: </label>
+            <input type="text" id="tripLocation"></input>
+          <label for="eventName">Event Name: </label>
+            <input type="text" id="eventName"></input>
+          <label for="tripDetails">Details: </label>
+            <input type="text" id="tripDetails"><input/>
+          <label for="tripStart">Start Date: </label>
+            <input id="tripStartDate" type="date"></input>
+          <label for="tripEnd">End Date: </label>
+            <input id="tripEndDate" type="date"></input>
+          <button class="button" id="eventPaid">Event Paid? </button>
+          <button class="button" id="flightScheduled">Flight Scheduled? </button>
+          <button class="button" id="hotelReserved">Hotel Reserved? </button>
+          <p id="rental-message"></p>
+          <button type="submit" id='addTripButton' class="button">Add Trip</button>
+        </section>
+      </form>
+    </script>
 
     <script src="/app.bundle.js"></script>
   </body>

@@ -22,22 +22,11 @@ const LoginView = Backbone.View.extend({
   render: function() {
     console.log("Inside LoginView render");
     console.log(this);
-    // var that = this;
-    // this.model.each(function(login) {
-    //   var loginView = new LoginView({
-    //     model: login,
-    //     template: that.template
-    //   });
-    //   that.$('#login-view').append(loginView.render().$el);
-    // });
-      // console.log(login);
-      // that.listenTo(loginView, "getLoginForm", that.getLoginForm);
-    var compiledTemplate = this.template(this.model.toJSON());
-    // this.$el.html(compiledTemplate);
-    this.$('#login-form').html(compiledTemplate);
 
+    var compiledTemplate = this.template(this.model.toJSON());
+    this.$('#login-form').html(compiledTemplate);
     return this;
-    // });
+
   },
   events: {
     "click #loginButton" : "loginTraveler"
@@ -47,8 +36,7 @@ const LoginView = Backbone.View.extend({
     console.log("loginView, loginTraveler button");
     var loginEmail = this.$("#loginEmail").val();
     var loginPassword = this.$("#loginPassword").val();
-    // console.log(loginEmail);
-    // console.log(loginPassword);
+
     var formDetails = {
       auth: {
         email: loginEmail,
@@ -59,8 +47,7 @@ const LoginView = Backbone.View.extend({
     loginTraveler.url = "http://localhost:3000/traveler_token";
     loginTraveler.save(formDetails,  {
       success: function(data) {
-        // console.log(loginTraveler);
-        // console.log(loginTraveler.attributes.jwt);
+
         console.log("token created");
         // set localStorage
         window.localStorage.setItem("Authorization", loginTraveler.attributes.jwt);
@@ -83,17 +70,6 @@ const LoginView = Backbone.View.extend({
             console.log("Bad auth token...");
           }
         });
-        // then possibly render the traveler view
-
-
-        // var backboneSync = Backbone.sync;
-        // Backbone.sync = function(method, model, options) {
-        //   options.headers = {
-        //     'Authorization': 'Bearer ' + loginTraveler.attributes.jwt
-        //   };
-        //   backboneSync(method, model, options);
-        //   console.log(backboneSync(method, model, options));
-        // };
       },
       error: function(data) {
         console.log("token creation failed");
