@@ -22,7 +22,7 @@ var TravelerListView = Backbone.View.extend({
         model: traveler,
         template: that.template
       });
-      that.$('#list-travelers').append(travelerView.render().$el);
+      that.$('#welcome-traveler').append(travelerView.render().el);
     });
     return this;
   }

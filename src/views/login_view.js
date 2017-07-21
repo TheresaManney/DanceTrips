@@ -59,6 +59,7 @@ const LoginView = Backbone.View.extend({
         myTripList.fetch( {
           headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
           success: function() {
+
             var myTripListView = new TripListView({
               model: myTripList,
               template: _.template($('#list-trips-template').html()),
@@ -70,13 +71,29 @@ const LoginView = Backbone.View.extend({
             console.log("Bad auth token...");
           }
         });
+
+        var myTravelerList = new TravelerList();
+        myTravelerList.fetch( {
+          headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
+          success: function() {
+            var myTravelerListView = new TravelerListView({
+              model: myTravelerList,
+              template: _.template($('#welcome-traveler-template').html()),
+              el: 'header'
+            });
+            console.log(myTravelerListView);
+            myTravelerListView.render();
+          },
+          error: function() {
+            console.log("Bad auth token...");
+          }
+        });
       },
       error: function(data) {
         console.log("token creation failed");
-      }
+      }  
     });
-  },
-
+  }
 });
 
 export default LoginView;

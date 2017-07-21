@@ -6,10 +6,19 @@
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
     <link rel='stylesheet' type='text/css' href='css/styles.css'>
     <title>Swing Trips</title>
+
+    <!-- Google map style -->
+    <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+    </style>
   </head>
   <body>
     <header>
       <h1>Trip Tracker</h1>
+      <section id="welcome-traveler"></section>
       <nav>
 <!-- login -->
 <!-- signup -->
@@ -17,13 +26,34 @@
       </nav>
     </header>
     <main class="row">
+
+      <h3>My Google Maps Demo</h3>
+      <div id="map"></div>
+      <script>
+        function initMap() {
+          var uluru = {lat: -25.363, lng: 131.044};
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
+          });
+          var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+          });
+        }
+      </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA51uKTzqPN1-3ugVbtRr_evp5LPEomlgo&callback=initMap">
+      </script>
+
       <section id="login-form"></section>
-      <section id='list-travelers'></section>
+      <section id="list-travelers"></section>
       <section class="row">
         <button class="button columns small-12 medium-2 large-2" id="add-trip-button">Add a Trip!</button>
       </section>
-      <section id='list-trips'></section>
+      <section id="list-trips"></section>
       <section id="trip-form"></section>
+      <section id="trip-info"></section>
       </section>
     </main>
 
@@ -63,14 +93,20 @@
         </form>
       </section> -->
     </script>
-    <!-- list travelers -->
-    <script id='list-travelers-template' type='text/template'>
+
+    <!-- welcome traveler -->
+    <script id='welcome-traveler-template' type='text/template'>
+      <h4>Welcome <%- first_name %></h4>
+    </script>
+
+    <!-- list travelers:used for testing -->
+    <!-- <script id='list-travelers-template' type='text/template'>
 
       <h2><%- email %></h2>
       <p>
         <%- trips %>
       </p>
-    </script>
+    </script> -->
 
     <!-- list trips -->
 
@@ -88,22 +124,48 @@
         <!-- <input type="hidden" id="travelerId" name="travelerId" value="this.Value.Id" /> -->
         <section class="input-group">
           <label for="tripLocation">Location: </label>
-            <input type="text" id="tripLocation"></input>
+            <input type="text" id="tripLocation" name="location"></input>
           <label for="eventName">Event Name: </label>
-            <input type="text" id="eventName"></input>
+            <input type="text" id="eventName" name="event_name"></input>
           <label for="tripDetails">Details: </label>
-            <input type="text" id="tripDetails"><input/>
+            <input type="text" id="tripDetails" name="details"></input>
           <label for="tripStart">Start Date: </label>
-            <input id="tripStartDate" type="date"></input>
+            <input id="tripStartDate" type="date" name="start_date"></input>
           <label for="tripEnd">End Date: </label>
-            <input id="tripEndDate" type="date"></input>
-          <button class="button" id="eventPaid">Event Paid? </button>
-          <button class="button" id="flightScheduled">Flight Scheduled? </button>
-          <button class="button" id="hotelReserved">Hotel Reserved? </button>
-          <p id="rental-message"></p>
-          <button type="submit" id='addTripButton' class="button">Add Trip</button>
+            <input id="tripEndDate" type="date" name="end_date"></input>
+          <label for="eventPaid">Event Paid? </label>
+            <input id="eventPaid" type="checkbox" name="event_paid"></br>
+          <label for="flightScheduled">Flight Scheduled? </label>
+            <input id="flightScheduled" type="checkbox" name="flight_paid"></br>
+          <label for="hotelReserved">Hotel Reserved? </label>
+            <input id="hotelReserved" type="checkbox" name="hotel_reserved"></br>
+          <button type="submit" id='submit-trip-button' class="button">Add Trip</button>
         </section>
       </form>
+    </script>
+
+    <!-- trip info -->
+    <script id="trip-info-template" type="text/template">
+      <h3>Location: <%- location %></h3>
+      <h4>Event Name: <%- event_name %></h4>
+      <h4>Start Date: <%- start_date %></h4>
+      <h4>End Date: <%- end_date %></h4>
+      <p>Trip Details: <%- details %></p>
+      Event Paid? <% if(event_paid) { %>
+        <input type="checkbox" name="event_paid" checked="checked" />
+        <% } else { %>
+          <input type="checkbox" name="event_paid" />
+          <% } %>
+      Flight Scheduled? <% if(flight_paid) { %>
+        <input type="checkbox" name="flight_paid" checked="checked" />
+        <% } else { %>
+          <input type="checkbox" name="flight_paid" />
+          <% } %>
+      Hotel Reserved? <% if(hotel_reserved) { %>
+        <input type="checkbox" name="hotel_reserved" checked="checked" />
+        <% } else { %>
+          <input type="checkbox" name="hotel_reserved" />
+          <% } %>
     </script>
 
     <script src="/app.bundle.js"></script>

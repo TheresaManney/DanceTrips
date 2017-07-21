@@ -7,6 +7,11 @@ import Trip from '../models/trip.js';
 import TripList from '../collections/trip_list.js';
 import AddTripFormView from './add_trip_form_view.js';
 
+import Traveler from '../models/traveler.js';
+import TravelerList from '../collections/traveler_list.js';
+import TravelerView from './traveler_view.js';
+import TravelerListView from './traveler_list_view.js';
+
 var TripListView = Backbone.View.extend({
   initialize: function(params) {
     console.log(">>> Breadcrum #1");
@@ -25,14 +30,21 @@ var TripListView = Backbone.View.extend({
         model: trip,
         template: that.template
       });
-      that.$('#list-trips').append(tripView.render().$el);
+      that.$('#list-trips').append(tripView.render().el);
     });
+    // gets all locations
+    var locations = [];
+    for (var i = 0; i < this.model.length; i++) {
+      locations.push(this.model.models[i].attributes.location);
+    }
+    console.log(locations);
     return this;
-    var addTrip = new AddTripFormView
+    // var addTrip = new AddTripFormView
 
   },
   events: {
-    'click #add-trip-button' : 'getAddTripForm'
+    'click #add-trip-button' : 'getAddTripForm',
+    'click #submit-trip-button' : 'addTrip'
   },
   // getFormData: function() {
   //   var location = this.$('#tripLocation').val();
@@ -59,7 +71,7 @@ var TripListView = Backbone.View.extend({
     event.preventDefault();
     // this.$("#trip-form").show();
     // render form
-
+    console.log(this.model);
     var location = this.$('#tripLocation').val();
     var eventName = this.$('#eventName').val();
     var details = this.$('#tripDetails').val();
@@ -78,16 +90,25 @@ var TripListView = Backbone.View.extend({
       flight_paid: flightScheduled,
       hotel_reserved: hotelReserved
     };
-    var newTrip = new Trip();
-    newTrip.url = "http://localhost:3000/trips";
+    // var newTrip = new Trip();
+    // newTrip.url = "http://localhost:3000/trips";
     console.log("add trip button");
-    newTrip.fetch( {
+    this.model.fetch( {
       headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization") },
       success: function() {
-        // var newTrip = new Trip(this.getFormData());
-        // newTrip.url = "http://localhost:3000/trips";
-        // this.model.create(newTrip);
         console.log("successful authorization for adding a trip");
+        // console.log(this.model);
+        var newTrip = new Trip();
+        newTrip.url = "http://localhost:3000/trips";
+        newTrip.create(tripDetails, {
+          success: function(data) {
+            console.log("Created trip!", data);
+          },
+          error: function(data) {
+            console.log("failed to create trip", data);
+          }
+        });
+        // this.model.create(newTrip);
       },
       error: function() {
         console.log("Not authorized");
