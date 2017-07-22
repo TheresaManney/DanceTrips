@@ -53,25 +53,6 @@ const LoginView = Backbone.View.extend({
         window.localStorage.setItem("Authorization", loginTraveler.attributes.jwt);
         console.log(localStorage.getItem("Authorization"));
 
-        // instantiate the collection
-        var myTripList = new TripList();
-        // fetch with special Authorization
-        myTripList.fetch( {
-          headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
-          success: function() {
-
-            var myTripListView = new TripListView({
-              model: myTripList,
-              template: _.template($('#list-trips-template').html()),
-              el: 'main'
-            });
-            myTripListView.render();
-          },
-          error: function() {
-            console.log("Bad auth token...");
-          }
-        });
-
         var myTravelerList = new TravelerList();
         myTravelerList.fetch( {
           headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
@@ -88,10 +69,29 @@ const LoginView = Backbone.View.extend({
             console.log("Bad auth token...");
           }
         });
+        // instantiate the collection
+        var myTripList = new TripList();
+        // fetch with special Authorization
+        myTripList.fetch( {
+          headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
+          success: function() {
+
+            var myTripListView = new TripListView({
+              travelerList: myTravelerList,
+              model: myTripList,
+              template: _.template($('#list-trips-template').html()),
+              el: 'main'
+            });
+            myTripListView.render();
+          },
+          error: function() {
+            console.log("Bad auth token...");
+          }
+        });
       },
       error: function(data) {
         console.log("token creation failed");
-      }  
+      }
     });
   }
 });

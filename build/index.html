@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <meta charset='utf-8'>
     <link rel='stylesheet' type='text/css' href='css/_settings.css'>
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
@@ -14,6 +15,7 @@
       width: 100%;
     }
     </style>
+
   </head>
   <body>
     <header>
@@ -27,26 +29,112 @@
     </header>
     <main class="row">
 
-      <h3>My Google Maps Demo</h3>
       <div id="map"></div>
       <script>
-        function initMap() {
-          var uluru = {lat: -25.363, lng: 131.044};
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: uluru
-          });
+      // var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+      //
+      // var locations = [
+      //   "Seattle",
+      //   "london",
+      //   "Alaska"
+      // ]
+      // for (var i = 0; i < locations.length; i++) {
+      //   url = baseUrl + encodeURI(locations[i]);
+      //   $.get(url, makeSuccessCallback(locations[i])).fail(failureCallback);
+      // }
+
+      //closure!
+// var makeSuccessCallback = function(name) {
+//   var successCallback = function(response) {
+//     response.results[0].name = name;
+//
+//     var target = $('#seven_wonders');
+//
+//     target.append('<li>' + response.results[0].name + ': Latitude - ' + response.results[0].geometry.location.lat + ', Longitude - ' + response.results[0].geometry.location.lng + '</li>');
+//   };
+//   return successCallback;
+// };
+
+        // var failureCallback = function() {
+        //   console.log("Didn't work :(");
+        //   $("#errors").html("<h1>AJAX request failed!</h1>");
+        // };
+        var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+
+        var getLocation = function(location) {
+          url = baseUrl + encodeURI(location);
+          // return $.ajax({url:url})
+          return $.get(url)
+        };
+          // locations populated from trips collection in trip_list_view
+          // take what you have console loged and put it into raw javascript code!
+        var locations = [
+          "Seattle",
+          "London",
+          "Boston"
+        ]
+
+        // geocodeArray will be an array that holds arrays of lats and longs
+        function setMarkers(map) {
+        var geocodeArray = [];
+        var requests = $.map(locations, getLocation)
+        // $.when.apply(null, requests).then(function(l1, l2, l3) {
+        $.when.apply(null, requests).then(function(l1, l2, l3) {
+
+          console.log(l1);
+          console.log(l2);
+          console.log(l3);
+          console.log("Lat: " + l1[0].results[0].geometry.location.lat);
+          console.log("Lng: " + l1[0].results[0].geometry.location.lng);
+
+          geocodeArray.push([l1[0].results[0].geometry.location.lat, l1[0].results[0].geometry.location.lng], [l2[0].results[0].geometry.location.lat, l2[0].results[0].geometry.location.lng], [l3[0].results[0].geometry.location.lat, l3[0].results[0].geometry.location.lng])
+          console.log(geocodeArray);
+
+        for (var i = 0; i < geocodeArray.length; i++) {
+          var location = geocodeArray[i];
+          console.log(location);
           var marker = new google.maps.Marker({
-            position: uluru,
+            position: {lat: location[0], lng: location[1]},
             map: map
           });
+          console.log(marker);
+        }
+      });
+
+      }
+        // function setMarkers(map) {
+        //   for (var i = 0; i < locations.length; i++) {
+        //     var location = locations[i];
+        //     var marker = new google.maps.Marker({
+        //       position: {lat: location[1], lng: location[2]
+        //       });
+        //   }}
+
+        function initMap() {
+
+          // display of map
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 2,
+            center: new google.maps.LatLng(20.397, -5.644)
+          });
+
+          setMarkers(map);
+
+          // Test for one marker:
+          // var seattle = {lat: 47.6062095, lng: -122.3320708};
+          //
+          // var marker = new google.maps.Marker({
+          //   position: seattle,
+          //   map: map
+          // });
         }
       </script>
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA51uKTzqPN1-3ugVbtRr_evp5LPEomlgo&callback=initMap">
+
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAKeLRJGXxhSe6gUvUXe4_-p9iyVa8pQ&callback=initMap">
       </script>
 
       <section id="login-form"></section>
+      <section id="signup-form"></section>
       <section id="list-travelers"></section>
       <section class="row">
         <button class="button columns small-12 medium-2 large-2" id="add-trip-button">Add a Trip!</button>
@@ -75,23 +163,21 @@
 
     <!-- sign up -->
     <script id='sign-up-template' type='text/template'>
-      <!-- <section id='sign-up' class="small-11 large-3 medium-3 columns">
         <h2>Sigup!</h2>
-        <form id="signup-form" class="row">
-          <label class="columns medium-12" for="first-name">First Name: </label>
-            <input type="text" name="first-name" placeholder="First name here plz"> </input>
-          <label class = "columns medium-12" for="last-name">Last Name: </label>
+        <form id="signup-form">
+          <label id="firstName">First Name: </label>
+            <input type="text" name="first_name" placeholder="First name here plz"> </input>
+          <label id="last-name">Last Name: </label>
             <input type="text" name="last-name" placeholder="Last name here plz"></input>
-          <label class="columns medium-12" for="email">Email: </label>
+          <label id="email">Email: </label>
             <input type="text" name="email" placeholder="janedoe@gmail.com"></input>
-          <label class="columns medium-12" for="password">Password: </label>
-            <input type="password" id="signup-password" name="traveler_password" placeholder="***********"></input>
-          <label class="columns medium-12" for="password">Password Confirmation: </label>
-            <input type="password" id="signup-password-confirmation" name="traveler_password_confirmation" placeholder="***********"></input>
+          <label id="password">Password: </label>
+            <input type="password" id="signup-password" name="password" placeholder="***********"></input>
+          <label id="passwordConfirmation">Password Confirmation: </label>
+            <input type="password" id="signup-password-confirmation" name="password_confirmation" placeholder="***********"></input>
 
-          <button type="submit" id='signup-btn' class="button">Signup</button>
+          <button type="submit" id='signupButton' class="button">Signup</button>
         </form>
-      </section> -->
     </script>
 
     <!-- welcome traveler -->
