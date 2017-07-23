@@ -31,34 +31,6 @@
 
       <div id="map"></div>
       <script>
-      // var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-      //
-      // var locations = [
-      //   "Seattle",
-      //   "london",
-      //   "Alaska"
-      // ]
-      // for (var i = 0; i < locations.length; i++) {
-      //   url = baseUrl + encodeURI(locations[i]);
-      //   $.get(url, makeSuccessCallback(locations[i])).fail(failureCallback);
-      // }
-
-      //closure!
-// var makeSuccessCallback = function(name) {
-//   var successCallback = function(response) {
-//     response.results[0].name = name;
-//
-//     var target = $('#seven_wonders');
-//
-//     target.append('<li>' + response.results[0].name + ': Latitude - ' + response.results[0].geometry.location.lat + ', Longitude - ' + response.results[0].geometry.location.lng + '</li>');
-//   };
-//   return successCallback;
-// };
-
-        // var failureCallback = function() {
-        //   console.log("Didn't work :(");
-        //   $("#errors").html("<h1>AJAX request failed!</h1>");
-        // };
         var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
 
         var getLocation = function(location) {
@@ -71,47 +43,50 @@
         var locations = [
           "Seattle",
           "London",
-          "Boston"
+          "Boston",
+          "Alaska"
         ]
 
         // geocodeArray will be an array that holds arrays of lats and longs
         function setMarkers(map) {
-        var geocodeArray = [];
-        var requests = $.map(locations, getLocation)
-        // $.when.apply(null, requests).then(function(l1, l2, l3) {
-        $.when.apply(null, requests).then(function(l1, l2, l3) {
+          var geocodeArray = [];
+          var requests = $.map(locations, getLocation)
+          // $.when.apply(null, requests).then(function(l1, l2, l3) {
+        $.when.apply(null, requests).then(function(...location) {
+          for (var i = 0; i < location.length; i++) {
+            console.log(location[i][0].results[0].geometry.location.lat);
+            console.log(location[i][0].results[0].geometry.location.lng);
 
-          console.log(l1);
-          console.log(l2);
-          console.log(l3);
-          console.log("Lat: " + l1[0].results[0].geometry.location.lat);
-          console.log("Lng: " + l1[0].results[0].geometry.location.lng);
+            geocodeArray.push([location[i][0].results[0].geometry.location.lat, location[i][0].results[0].geometry.location.lng])
+          }
+            // console.log(l1);
+            // console.log(l2);
+            // console.log(l3);
+            // console.log("Lat: " + l1[0].results[0].geometry.location.lat);
+            // console.log("Lng: " + l1[0].results[0].geometry.location.lng);
 
-          geocodeArray.push([l1[0].results[0].geometry.location.lat, l1[0].results[0].geometry.location.lng], [l2[0].results[0].geometry.location.lat, l2[0].results[0].geometry.location.lng], [l3[0].results[0].geometry.location.lat, l3[0].results[0].geometry.location.lng])
           console.log(geocodeArray);
 
-        for (var i = 0; i < geocodeArray.length; i++) {
-          var location = geocodeArray[i];
-          console.log(location);
-          var marker = new google.maps.Marker({
-            position: {lat: location[0], lng: location[1]},
-            map: map
+          for (var i = 0; i < geocodeArray.length; i++) {
+            var location = geocodeArray[i];
+            console.log(location);
+            var marker = new google.maps.Marker({
+                position: {lat: location[0], lng: location[1]},
+                map: map
+              });
+              console.log(marker);
+            }
           });
-          console.log(marker);
         }
-      });
-
-      }
         // function setMarkers(map) {
         //   for (var i = 0; i < locations.length; i++) {
         //     var location = locations[i];
         //     var marker = new google.maps.Marker({
-        //       position: {lat: location[1], lng: location[2]
+        //       position: {lat: location[0], lng: location[1]
         //       });
         //   }}
 
         function initMap() {
-
           // display of map
           var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 2,
