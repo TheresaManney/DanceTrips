@@ -47,44 +47,26 @@
           "Alaska"
         ]
 
-        // geocodeArray will be an array that holds arrays of lats and longs
+        // geocodeArray is an array that holds arrays of lats and longs
         function setMarkers(map) {
-          var geocodeArray = [];
-          var requests = $.map(locations, getLocation)
-          // $.when.apply(null, requests).then(function(l1, l2, l3) {
+        var geocodeArray = [];
+        var requests = $.map(locations, getLocation)
+
         $.when.apply(null, requests).then(function(...location) {
           for (var i = 0; i < location.length; i++) {
-            console.log(location[i][0].results[0].geometry.location.lat);
-            console.log(location[i][0].results[0].geometry.location.lng);
-
             geocodeArray.push([location[i][0].results[0].geometry.location.lat, location[i][0].results[0].geometry.location.lng])
           }
-            // console.log(l1);
-            // console.log(l2);
-            // console.log(l3);
-            // console.log("Lat: " + l1[0].results[0].geometry.location.lat);
-            // console.log("Lng: " + l1[0].results[0].geometry.location.lng);
-
-          console.log(geocodeArray);
 
           for (var i = 0; i < geocodeArray.length; i++) {
             var location = geocodeArray[i];
-            console.log(location);
+
             var marker = new google.maps.Marker({
                 position: {lat: location[0], lng: location[1]},
                 map: map
               });
-              console.log(marker);
             }
           });
         }
-        // function setMarkers(map) {
-        //   for (var i = 0; i < locations.length; i++) {
-        //     var location = locations[i];
-        //     var marker = new google.maps.Marker({
-        //       position: {lat: location[0], lng: location[1]
-        //       });
-        //   }}
 
         function initMap() {
           // display of map
@@ -92,16 +74,7 @@
             zoom: 2,
             center: new google.maps.LatLng(20.397, -5.644)
           });
-
           setMarkers(map);
-
-          // Test for one marker:
-          // var seattle = {lat: 47.6062095, lng: -122.3320708};
-          //
-          // var marker = new google.maps.Marker({
-          //   position: seattle,
-          //   map: map
-          // });
         }
       </script>
 
