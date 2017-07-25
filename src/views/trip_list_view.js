@@ -7,14 +7,11 @@ import Trip from '../models/trip.js';
 import TripList from '../collections/trip_list.js';
 import AddTripFormView from './add_trip_form_view.js';
 
-import Traveler from '../models/traveler.js';
-import TravelerList from '../collections/traveler_list.js';
-import TravelerView from './traveler_view.js';
-import TravelerListView from './traveler_list_view.js';
+import MapView from './map_view.js';
 
 var TripListView = Backbone.View.extend({
   initialize: function(params) {
-    this.$("#signup-form").hide();
+    this.$("#all-login").hide();
     $("#map").show();
 
     console.log(">>> Breadcrum #1");
@@ -25,11 +22,22 @@ var TripListView = Backbone.View.extend({
     console.log(params.model);
     console.log(params.model.trip);
 
+    var that = this;
+    // var tripListModel = new TripList();
+    // instantiate MapView here!
+    var mapView = new MapView({
+      // pass in trip list model
+      model: that.model
+    });
+
+
     this.traveler = params.travelerList;
 
     // this.model = params.model.trip;
     this.listenTo(this.model, "update", this.render);
-    this.$("#login-form").hide();
+    // trying to listenTo change for when a trip is added
+    this.listenTo(this.model, 'change', this.render);
+    this.$("#all-login").hide();
   },
   render: function() {
     console.log(">>> Breadcrum #2");
@@ -42,41 +50,12 @@ var TripListView = Backbone.View.extend({
       });
       that.$('#list-trips').append(tripView.render().el);
     });
-    // gets all locations
-    var locations = [];
-    for (var i = 0; i < this.model.length; i++) {
-      locations.push(this.model.models[i].attributes.location);
-    }
-    console.log(locations);
     return this;
-    // var addTrip = new AddTripFormView
-
   },
   events: {
     'click #add-trip-button' : 'getAddTripForm',
     'click #submit-trip-button' : 'addTrip'
   },
-  // getFormData: function() {
-  //   var location = this.$('#tripLocation').val();
-  //   var eventName = this.$('#eventName').val();
-  //   var details = this.$('#tripDetails').val();
-  //   var startDate = this.$('#tripStartDate').val();
-  //   var endDate = this.$('#tripEndDate').val();
-  //   var eventPaid = this.$('#eventPaid').val();
-  //   var flightScheduled = this.$('#flightScheduled').val();
-  //   var hotelReserved = this.$('#hotelReserved').val();
-  //   var tripDetails = {
-  //     location: location,
-  //     event_name: eventName,
-  //     details: details,
-  //     start_date: startDate,
-  //     end_date: endDate,
-  //     event_paid: eventPaid,
-  //     flight_paid: flightScheduled,
-  //     hotel_reserved: hotelReserved
-  //   };
-  //   return tripDetails;
-  // },
   addTrip: function(event) {
     event.preventDefault();
     // this.$("#trip-form").show();
@@ -91,16 +70,9 @@ var TripListView = Backbone.View.extend({
     var flightScheduled = this.$('#flightScheduled').is(":checked");
     var hotelReserved = this.$('#hotelReserved').is(":checked");
 
-    // this.model.fetch( {
-    //   headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
-    //   success: function() {
-    //     var currentTraveler = new TravelerList();
-    //     console.log(currentTraveler.fetch());
-    //   }
-    // });
     console.log(this.traveler);
     console.log(this.traveler.first());
-    // var travelerId = ;
+
     var tripDetails = {
       location: location,
       event_name: eventName,
@@ -112,8 +84,7 @@ var TripListView = Backbone.View.extend({
       hotel_reserved: hotelReserved,
       traveler_id: this.traveler.first().get("id")
     };
-    // var newTrip = new Trip();
-    // newTrip.url = "http://localhost:3000/trips";
+
     console.log("add trip button");
     var that = this;
     this.model.fetch( {
@@ -123,25 +94,24 @@ var TripListView = Backbone.View.extend({
         // console.log(this.model);
         var newTrip = new Trip(tripDetails);
         newTrip.url = "http://localhost:3000/trips";
-        // that.model.save(newTrip);
+
         newTrip.save(tripDetails, {
           success: function(data) {
             console.log("Trip created");
-            that.$("#trip-form").hide();
-            // that.$("#list-trips").empty();
+            that.$("#section-trip-form").hide();
+            that.$("#list-trips").empty();
             that.$("#list-trips").show();
+            that.model.add(newTrip);
           },
           error: function(data) {
             console.log("Trip did not save");
           }
         });
-        // this.model.create(newTrip);
       },
       error: function() {
         console.log("Not authorized");
       }
     });
-    // newTrip.save(tripDetails)
   },
   getAddTripForm: function() {
     console.log("inside getAddTripForm");

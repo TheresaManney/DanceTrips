@@ -1,3 +1,5 @@
+
+
 import Backbone from 'backbone';
 import _ from 'underscore';
 import $ from 'jquery';
@@ -12,6 +14,7 @@ import TripList from '../collections/trip_list.js';
 import TripListView from './trip_list_view.js';
 
 const LoginView = Backbone.View.extend({
+
   initialize: function(params) {
 
     console.log('Initializing Login View');
@@ -32,6 +35,7 @@ const LoginView = Backbone.View.extend({
     "click #loginButton" : "loginTraveler"
   },
   loginTraveler: function(event) {
+    var that = this;
     event.preventDefault();
     console.log("loginView, loginTraveler button");
     var loginEmail = this.$("#loginEmail").val();
@@ -75,6 +79,7 @@ const LoginView = Backbone.View.extend({
         myTripList.fetch( {
           headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
           success: function() {
+            that.$("#add-trip-button").show();
 
             var myTripListView = new TripListView({
               travelerList: myTravelerList,

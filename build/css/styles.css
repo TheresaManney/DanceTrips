@@ -11,22 +11,89 @@ header {
 }
 
 label {
-  color: white;
+  color: #3B3355;
   font-size: 1em;
+  text-align: left;
 }
 
 h2 {
+  color: #3B3355;
+}
+
+h3 {
   color: white;
 }
 
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+#all-login {
+  width: 75%;
+}
+/*
+#sign-up section {
+  position: absolute;
+  right: 20px;
+}*/
+
+
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
-#map {
+/*#map {
   height: 100%;
-}
+}*/
 /* Optional: Makes the sample page fill the window. */
-html, body {
+/*html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}*/
+
+
+/*.floated-label-wrapper {
+  position: relative;
+}*/
+
+/*.floated-label-wrapper label {
+  background: #fefefe;
+  color: #1779ba;
+  font-size: 0.75rem;
+  font-weight: 600;
+  left: 0.75rem;
+  opacity: 0;
+  padding: 0 0.25rem;
+  position: absolute;
+  top: 2rem;
+  transition: all 0.15s ease-in;
+  z-index: -1;
+}*/
+
+/*.floated-label-wrapper label input[type=text],
+.floated-label-wrapper label input[type=email],
+.floated-label-wrapper label input[type=password] {
+  border-radius: 4px;
+  font-size: 1.75em;
+  padding: 0.5em;
+}*/
+
+/*.floated-label-wrapper label.show {
+  opacity: 1;
+  top: -0.85rem;
+  z-index: 1;
+  transition: all 0.15s ease-in;
+}*/
+.alert-callout-border {
+  width: 100%;
+  padding: 1.3rem;
+  border-left-width: 0.3125rem;
+  border-left-color: #cacaca;
+}
+.alert-callout-border.success {
+  border-left-color: #3adb76;
+}
+
+.alert-callout-border.alert {
+  border-left-color: #cc4b37;
 }
