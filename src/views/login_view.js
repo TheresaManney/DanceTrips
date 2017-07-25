@@ -85,7 +85,8 @@ const LoginView = Backbone.View.extend({
               travelerList: myTravelerList,
               model: myTripList,
               template: _.template($('#list-trips-template').html()),
-              el: 'main'
+              deetTemplate: _.template($('#trip-info-template').html()),
+              el: 'body'
             });
             myTripListView.render();
           },

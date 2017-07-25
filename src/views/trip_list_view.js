@@ -18,6 +18,7 @@ var TripListView = Backbone.View.extend({
     console.log(params);
     // console.log(params.model.traveler);
     this.template = params.template;
+    this.detailsTemplate = params.deetTemplate;
     console.log(params.template);
     console.log(params.model);
     console.log(params.model.trip);
@@ -29,6 +30,7 @@ var TripListView = Backbone.View.extend({
       // pass in trip list model
       model: that.model
     });
+    mapView.render();
 
 
     this.traveler = params.travelerList;
@@ -40,6 +42,8 @@ var TripListView = Backbone.View.extend({
     this.$("#all-login").hide();
   },
   render: function() {
+    $('#section-trip-form').hide();
+
     console.log(">>> Breadcrum #2");
     var that = this;
     console.log(this.model.length);
@@ -48,13 +52,23 @@ var TripListView = Backbone.View.extend({
         model: trip,
         template: that.template
       });
+      that.listenTo(tripView, 'selected', that.tripDetails);
       that.$('#list-trips').append(tripView.render().el);
     });
     return this;
   },
   events: {
     'click #add-trip-button' : 'getAddTripForm',
-    'click #submit-trip-button' : 'addTrip'
+    'click #submit-trip-button' : 'addTrip',
+    'click header' : 'allTrips'
+  },
+  tripDetails: function(trip) {
+    this.$('#list-trips').hide();
+    this.$('#trip-info').show();
+
+    var showTripDetails = this.detailsTemplate(trip.attributes);
+    console.log(showTripDetails);
+    this.$('#trip-info').append(showTripDetails);
   },
   addTrip: function(event) {
     event.preventDefault();
@@ -104,6 +118,9 @@ var TripListView = Backbone.View.extend({
             that.model.add(newTrip);
           },
           error: function(data) {
+            that.$("#section-trip-form").show();
+            that.$("#list-trips").empty();
+
             console.log("Trip did not save");
           }
         });
@@ -115,8 +132,9 @@ var TripListView = Backbone.View.extend({
   },
   getAddTripForm: function() {
     console.log("inside getAddTripForm");
-    this.$("#list-trips").empty();
-    this.$("#trip-form").show();
+    this.$('#trip-info').hide();
+    this.$("#list-trips").hide();
+    this.$("#section-trip-form").show();
     this.$("#trip-form").empty();
 
     var newTrip = new Trip();
@@ -128,6 +146,12 @@ var TripListView = Backbone.View.extend({
     });
     // this.$("#trip-form").append(tripForm.render().$el);
     tripForm.render();
+  },
+  allTrips: function() {
+    // console.log("clicked on header");
+    this.$('#trip-info').empty();
+    this.$('#section-trip-form').hide();
+    this.$('#list-trips').show();
   }
 });
 

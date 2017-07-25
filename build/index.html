@@ -20,8 +20,9 @@
     </header>
     <main>
 
-      <div id="map"></div>
+      <div class="row" id="map"></div>
       <script>
+        // console.log(trip.location);
         var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
 
         var getLocation = function(location) {
@@ -98,12 +99,12 @@
         <button class="button columns small-12 medium-2 large-2" id="add-trip-button">Add a Trip!</button>
       </section>
 
-      <section id="list-trips"></section>
+      <section id="list-trips" class="row" data-equalizer></section>
 
-      <section id="section-trip-form">
-        <section class="row text-center" data-equalizer>
-          <section class="callout small-6 medium-4 large-3 columns" data-equalizer-watch>
-            <section id="trip-form"></section>
+      <section id="section-trip-form" class="row">
+        <section class="text-center" data-equalizer>
+          <section class="small-12 medium-12 large-12 columns" data-equalizer-watch>
+            <section class="callout" id="trip-form"></section>
           </section>
         </section>
       </section>
@@ -153,30 +154,20 @@
       <h4>Welcome <%- first_name %></h4>
     </script>
 
-    <!-- list travelers:used for testing -->
-    <!-- <script id='list-travelers-template' type='text/template'>
-
-      <h2><%- email %></h2>
-      <p>
-        <%- trips %>
-      </p>
-    </script> -->
-
-    <!-- list trips -->
-
     <script id='list-trips-template' type='text/template'>
-
-      <h3><%- location %></h3>
-      <p>
-        <%- details %>
-      </p>
+      <section  class="small-12 medium-4 large-3 columns" data-equalizer-watch>
+        <section class="trips callout">
+          <h3 class="trip"><%- location %></h3>
+          <p class="trip">
+            <%- details %>
+          </p>
+        </section>
+      </section>
     </script>
 
     <!-- add trips -->
     <script type="text/template" id="trip-form-template">
       <form>
-        <!-- <input type="hidden" id="travelerId" name="travelerId" value="this.Value.Id" /> -->
-        <section class="input-group">
           <label for="tripLocation">Location: </label>
             <input type="text" id="tripLocation" name="location"></input>
           <label for="eventName">Event Name: </label>
@@ -190,26 +181,26 @@
           <div class="polls-options">
             <div>
               <label for="eventPaid">Event Paid?
-                <input id="eventPaid" type="checkbox" name="event_paid">
+                <input id="eventPaid" type="checkbox" name="event_paid"/>
               </label>
             </div>
           </div>
           <div class="polls-options">
             <div>
               <label for="flightScheduled">Flight Scheduled?
-                <input id="flightScheduled" type="checkbox" name="flight_paid">
+                <input id="flightScheduled" type="checkbox" name="flight_paid"/>
               </label>
             </div>
           </div>
           <div class="polls-options">
             <div>
               <label for="hotelReserved">Hotel Reserved?
-                <input id="hotelReserved" type="checkbox" name="hotel_reserved">
+                <input id="hotelReserved" type="checkbox" name="hotel_reserved"/>
               </label>
             </div>
           </div>
           <button type="submit" id='submit-trip-button' class="button">Add Trip</button>
-        </section>
+        <!-- </section> -->
       </form>
     </script>
 

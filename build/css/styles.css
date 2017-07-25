@@ -1,13 +1,35 @@
 @include foundation-everything;
 
 main {
-    background: #3B3355;
+  background: #3B3355;
+  padding-top: 150px;
+}
+
+h1 {
+  /*background-color: #BFCDE0;*/
 }
 
 header {
-  background-color: #BFCDE0;
-  padding: 0.5rem;
   text-align: center;
+  width: 100%;
+  position: fixed;
+  background-size: cover;
+  background-position: center;
+  /*height: 20%;*/
+  z-index: 5;
+  background-color: #BFCDE0;
+  /*color: rgb(211, 231, 231);*/
+  border-bottom: solid;
+}
+#trips.callout {
+  background: rgba(240,230,220, .6);
+}
+.callout {
+  background: rgba(240,230,220, .6);
+}
+
+.callout:hover {
+  background: rgba(240,230,220, .8);
 }
 
 label {
@@ -19,71 +41,31 @@ label {
 h2 {
   color: #3B3355;
 }
-
-h3 {
-  color: white;
+.trips {
+  margin-bottom: 1em;
+  display: block;
+  /*margin: auto;*/
+  width: 250px;
+  height: 150px;
+  background-color: #FFFFFF;
+  text-align: center;
+  overflow: scroll;
 }
 
 #map {
   height: 400px;
-  width: 100%;
+  width: 90%;
+  border: solid;
 }
 
 #all-login {
   width: 75%;
 }
-/*
-#sign-up section {
-  position: absolute;
-  right: 20px;
-}*/
 
+#section-trip-form {
+  width: 65%;
+}
 
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
-/*#map {
-  height: 100%;
-}*/
-/* Optional: Makes the sample page fill the window. */
-/*html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}*/
-
-
-/*.floated-label-wrapper {
-  position: relative;
-}*/
-
-/*.floated-label-wrapper label {
-  background: #fefefe;
-  color: #1779ba;
-  font-size: 0.75rem;
-  font-weight: 600;
-  left: 0.75rem;
-  opacity: 0;
-  padding: 0 0.25rem;
-  position: absolute;
-  top: 2rem;
-  transition: all 0.15s ease-in;
-  z-index: -1;
-}*/
-
-/*.floated-label-wrapper label input[type=text],
-.floated-label-wrapper label input[type=email],
-.floated-label-wrapper label input[type=password] {
-  border-radius: 4px;
-  font-size: 1.75em;
-  padding: 0.5em;
-}*/
-
-/*.floated-label-wrapper label.show {
-  opacity: 1;
-  top: -0.85rem;
-  z-index: 1;
-  transition: all 0.15s ease-in;
-}*/
 .alert-callout-border {
   width: 100%;
   padding: 1.3rem;

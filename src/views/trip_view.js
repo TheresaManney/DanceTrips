@@ -14,6 +14,14 @@ var TripView = Backbone.View.extend({
     var compiledTemplate = this.template(this.model.toJSON());
     this.$el.html(compiledTemplate);
     return this;
+  },
+  events: {
+    'click .trip' : 'onClick'
+  },
+  onClick: function() {
+    var click = this.trigger('selected', this.model);
+    console.log('click', click);
+
   }
 });
 

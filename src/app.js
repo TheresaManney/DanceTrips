@@ -25,6 +25,7 @@ var traveler = new Traveler();
 $(document).ready(function() {
   // $("#map").hide();
   $("#add-trip-button").hide();
+  $('#section-trip-form').hide();
 
   // create conditional that will check if there has been a token set... might use logic from loginView
 
