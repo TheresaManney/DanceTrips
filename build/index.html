@@ -27,63 +27,8 @@
     </header>
     <main>
 
-      <!-- <div class="row" id="map"></div> -->
       <div class="row" id="show-map">map div</div>
-      <!-- <script id='map-template' type='text/template'>
-        console.log(locations)
-
-        // console.log(trip.location);
-        var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-
-        var getLocation = function(location) {
-          url = baseUrl + encodeURI(location);
-          // return $.ajax({url:url})
-          return $.get(url)
-        };
-          // locations populated from trips collection in trip_list_view
-          // take what you have console loged and put it into raw javascript code!
-        var locations = [
-          "Seattle",
-          "London",
-          "Boston",
-          "Alaska"
-        ]
-
-        // geocodeArray is an array that holds arrays of lats and longs
-        function setMarkers(map) {
-        var geocodeArray = [];
-        var requests = $.map(locations, getLocation)
-
-        $.when.apply(null, requests).then(function(...location) {
-          for (var i = 0; i < location.length; i++) {
-            geocodeArray.push([location[i][0].results[0].geometry.location.lat, location[i][0].results[0].geometry.location.lng])
-          }
-
-          for (var i = 0; i < geocodeArray.length; i++) {
-            var location = geocodeArray[i];
-
-            var marker = new google.maps.Marker({
-                position: {lat: location[0], lng: location[1]},
-                map: map
-              });
-            }
-          });
-        }
-
-        function initMap() {
-          // display of map
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 2,
-            center: new google.maps.LatLng(20.397, -5.644)
-          });
-          setMarkers(map);
-        }
-      </script> -->
-
-      <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAKeLRJGXxhSe6gUvUXe4_-p9iyVa8pQ&callback=initMap">
-      </script> -->
-
-    <section id="all-login" class="row">
+      <section id="all-login" class="row">
       <section data-closable id="login-alert">
         <p id="login-message"></p>
         <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
