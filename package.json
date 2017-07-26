@@ -1,7 +1,11 @@
 {
-  "name": "backbone-baseline",
+  "name": "trip-tracker",
+  "description": "a trip tracking app",
   "version": "1.0.0",
-  "description": "",
+  "engines": {
+    "node": "7.10.0",
+    "npm": "4.2.0"
+  },
   "main": "./bin/app.bundle.js",
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
