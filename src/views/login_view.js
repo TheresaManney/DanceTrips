@@ -48,7 +48,8 @@ const LoginView = Backbone.View.extend({
       }
     };
     var loginTraveler = new Login();
-    loginTraveler.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/traveler_token";
+    loginTraveler.url = 'http://localhost:3000/traveler_token';
+    // loginTraveler.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/traveler_token";
     loginTraveler.save(formDetails,  {
       success: function(data) {
 
@@ -80,6 +81,7 @@ const LoginView = Backbone.View.extend({
           headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
           success: function() {
             that.$("#add-trip-button").show();
+            that.$('#nav-bar').show();
             var myTripListView = new TripListView({
               travelerList: myTravelerList,
               model: myTripList,

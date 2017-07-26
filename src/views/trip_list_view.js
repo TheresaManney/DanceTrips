@@ -25,6 +25,8 @@ var TripListView = Backbone.View.extend({
     console.log(params.model);
     // console.log(params.model.trip);
 
+    console.log(this);
+
     var that = this;
     // var tripListModel = new TripList();
     // instantiate MapView here!
@@ -64,19 +66,21 @@ var TripListView = Backbone.View.extend({
   events: {
     'click #add-trip-button' : 'getAddTripForm',
     'click #submit-trip-button' : 'addTrip',
-    'click header' : 'allTrips'
+    'click #home' : 'allTrips'
   },
   tripDetails: function(trip) {
     this.$('#list-trips').hide();
     this.$('#trip-info').show();
-
+    console.log(this.$('#list-trips'));
     var showTripDetails = this.detailsTemplate(trip.attributes);
     console.log(showTripDetails);
     this.$('#trip-info').append(showTripDetails);
+    console.log(this.$('#list-trips'));
+
   },
   addTrip: function(event) {
     event.preventDefault();
-    // this.$("#trip-form").show();
+    this.$("#trip-form").show();
     // render form
     console.log(this.model);
     var location = this.$('#tripLocation').val();
@@ -112,20 +116,21 @@ var TripListView = Backbone.View.extend({
         // console.log(this.model);
         var newTrip = new Trip(tripDetails);
         // newTrip.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips";
-
+        newTrip.url = 'http://localhost:3000/trips';
         newTrip.save(tripDetails, {
           success: function(data) {
             console.log("Trip created");
-            that.$("#section-trip-form").hide();
-            that.$("#list-trips").empty();
-            that.$("#list-trips").show();
+            // that.$("#section-trip-form").hide();
+            // that.$("#list-trips").empty();
+            // that.$("#list-trips").show();
+            that.allTrips();
             that.model.add(newTrip);
           },
           error: function(data) {
             that.$("#section-trip-form").show();
             // that.$("#list-trips").hide();
-            that.$("#list-trips").empty();
-            that.$("#list-trips").show();
+            // that.$("#list-trips").empty();
+            // that.$("#list-trips").show();
             console.log("Trip did not save");
           }
         });
@@ -138,26 +143,44 @@ var TripListView = Backbone.View.extend({
   getAddTripForm: function() {
     console.log("inside getAddTripForm");
     // this.$('#trip-info').hide();
-    // this.$("#list-trips").hide();
+    this.$('#trip-info').empty();
+    
+    this.$("#list-trips").hide();
     this.$("#section-trip-form").show();
-    // this.$("#trip-form").empty();
+    this.$("#trip-form").show();
+    this.$("#trip-form").empty();
 
     var newTrip = new Trip();
 
     var tripForm = new AddTripFormView({
       model: newTrip,
       template: _.template($("#trip-form-template").html()),
-      el: 'main'
+      el: 'body'
     });
     // this.$("#trip-form").append(tripForm.render().$el);
     tripForm.render();
   },
   allTrips: function() {
-    // console.log("clicked on header");
+    // event.preventDefault();
+
+    console.log("clicked on home");
+    console.log(this);
     this.$('#section-trip-form').hide();
     this.$('#trip-info').empty();
-    // this.$('#list-trips').empty();
+    //this.$('#list-trips').empty();
+
+    console.log(this.$('#list-trips'));
     this.$('#list-trips').show();
+    // var that = this;
+    // this.model.fetch( {
+    //   headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization") },
+    //   success: function(data) {
+    //     that.$('#section-trip-form').hide();
+    //     // that.$('#trip-info').hide();
+    //     that.$('#list-trips').empty();
+    //     that.$('#list-trips').show();
+    //   }
+    // });
   }
 });
 

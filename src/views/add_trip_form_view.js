@@ -11,9 +11,10 @@ var AddTripFormView = Backbone.View.extend({
   initialize: function(params) {
     // this.collection = travelerTrips;
     // console.log(this.collection);
-    // this.model = params.model;
+    this.model = params.model;
+    console.log(this.model);
     this.template = params.template;
-    // this.listenTo(this.model, "update", this.render);
+    this.listenTo(this.model, "update", this.render);
   },
   render: function() {
     console.log("Inside AddTripFormView render");

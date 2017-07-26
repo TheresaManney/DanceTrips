@@ -160,6 +160,7 @@ $(document).ready(function() {
 
   $("#add-trip-button").hide();
   $('#section-trip-form').hide();
+  $('#nav-bar').hide();
 
   // create conditional that will check if there has been a token set... might use logic from loginView
 
@@ -176,7 +177,7 @@ $(document).ready(function() {
     model: login,
     template: _.template($('#login-form-template').html()),
     map: App.map,
-    el: 'main'
+    el: 'body'
   });
   loginView.render();
 

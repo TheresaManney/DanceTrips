@@ -8796,7 +8796,7 @@
 	    model: login,
 	    template: _underscore2.default.template((0, _jquery2.default)('#login-form-template').html()),
 	    map: App.map,
-	    el: 'main'
+	    el: 'body'
 	  });
 	  loginView.render();
 	});
@@ -23015,7 +23015,7 @@
 	  },
 	  addTrip: function addTrip(event) {
 	    event.preventDefault();
-	    // this.$("#trip-form").show();
+	    this.$("#trip-form").show();
 	    // render form
 	    console.log(this.model);
 	    var location = this.$('#tripLocation').val();
@@ -23086,7 +23086,7 @@
 	    var tripForm = new _add_trip_form_view2.default({
 	      model: newTrip,
 	      template: _underscore2.default.template((0, _jquery2.default)("#trip-form-template").html()),
-	      el: 'main'
+	      el: 'body'
 	    });
 	    // this.$("#trip-form").append(tripForm.render().$el);
 	    tripForm.render();
