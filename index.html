@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <meta charset='utf-8'>
+    <link rel='stylesheet' type='text/css' href='css/_settings.css'>
+    <link rel='stylesheet' type='text/css' href='css/foundation.css'>
+    <link rel='stylesheet' type='text/css' href='css/styles.css'>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAKeLRJGXxhSe6gUvUXe4_-p9iyVa8pQ"></script>
+    <title>Swing Trips</title>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAKeLRJGXxhSe6gUvUXe4_-p9iyVa8pQ&callback=initMap">
+    </script> -->
+
+  </head>
+  <body>
+    <header>
+      <h1>Trip Tracker</h1>
+      <section id="welcome-traveler"></section>
+      <ul id="nav-bar" class="menu menu-hover-lines">
+        <!-- <li class="active"><a href="#">Home</a></li> -->
+        <li id="home"><a href="#">Home</a></li>
+        <li id="add-trip-button"><a href="#">Add a trip</a></li>
+
+        <li id="logout"><a href="#">Logout</a></li>
+      </ul>
+
+    </header>
+    <main>
+
+      <div class="row" id="show-map">map div</div>
+      <section id="all-login" class="row">
+      <section data-closable id="login-alert">
+        <p id="login-message"></p>
+        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+          <span aria-hidden="true">⊗</span>
+        </button>
+      </section>
+
+      <section class="text-center" data-equalizer>
+        <section class="small-6 medium-6 large-6 columns" data-equalizer-watch>
+          <section id="login-form" class="callout"></section>
+        </section>
+      </section>
+
+      <section id="sign-up" class="text-center" data-equalizer>
+        <section class="small-6 medium-6 large-6 columns" data-equalizer-watch >
+          <section id="signup-form" class="callout"></section>
+        </section>
+      </section>
+    </section>
+
+      <section id="list-travelers"></section>
+
+      <section id="list-trips" class="row" data-equalizer></section>
+      <!-- <section class="row">
+        <button class="button columns small-12 medium-2 large-2" id="add-trip-button">Add a Trip!</button>
+      </section> -->
+
+      <section id="section-trip-form" class="row">
+        <section class="text-center" data-equalizer>
+          <section class="small-12 medium-12 large-12 columns" data-equalizer-watch>
+            <section class="callout" id="trip-form"></section>
+          </section>
+        </section>
+      </section>
+
+    <section class="row" id="trip-info"></section>
+    </main>
+
+    <footer></footer>
+
+    <!-- TEMPLATES -->
+
+    <!-- login  -->
+    <script id='login-form-template' type='text/template'>
+      <form>
+        <h2>Login!</h2>
+
+        <label for="loginEmail">Email: </label>
+          <input type="email" id="loginEmail" name="email input" placeholder="Email" value="ada@lovelace.org"></input>
+        <label for="loginPassword">Password:</label>
+          <input type="password" id="loginPassword" name="password input" placeholder="Password" value="hello-world"></input>
+          <!-- </div> -->
+        <button type="submit" id='loginButton' class="button expanded">Login</button>
+      </form>
+    </script>
+
+    <!-- sign up -->
+    <script id='sign-up-template' type='text/template'>
+        <form id="signup-form">
+          <h2>Sign Up!</h2>
+          <label id="first-name">First Name: </label>
+            <input type="text" name="first_name" id="firstName" placeholder="First Name"> </input>
+          <label id="last-name">Last Name: </label>
+            <input type="text" name="last-name" id="lastName" placeholder="Last Name"></input>
+          <label id="email">Email: </label>
+            <input type="text" name="email" id="inputEmail" placeholder="Email"></input>
+          <label id="password">Password: </label>
+            <input type="password" id="signupPassword" name="password" placeholder="Password"></input>
+          <label id="passwordConfirmation">Password Confirmation: </label>
+            <input type="password" id="signupPasswordConfirmation" name="password_confirmation" placeholder="Password Confirmation"></input>
+
+          <button type="submit" id='signupButton' class="button expanded">Signup</button>
+        </form>
+    </script>
+
+    <!-- welcome traveler -->
+    <script id='welcome-traveler-template' type='text/template'>
+      <h4>Welcome <%- first_name %></h4>
+    </script>
+
+    <script id='list-trips-template' type='text/template'>
+      <section  class="small-12 medium-4 large-3 columns" data-equalizer-watch>
+        <section class="trips callout">
+          <h3 class="trip"><%- location %></h3>
+          <p class="trip">
+            <%- details %>
+          </p>
+        </section>
+      </section>
+    </script>
+
+    <!-- add trips -->
+    <script type="text/template" id="trip-form-template">
+      <form>
+        <h2>Add a Trip!</h2>
+          <label for="tripLocation">Location: </label>
+            <input type="text" id="tripLocation" name="location"></input>
+          <label for="eventName">Event Name: </label>
+            <input type="text" id="eventName" name="event_name"></input>
+          <label for="tripDetails">Details: </label>
+            <input type="text" id="tripDetails" name="details"></input>
+          <label for="tripStart">Start Date: </label>
+            <input id="tripStartDate" type="date" name="start_date"></input>
+          <label for="tripEnd">End Date: </label>
+            <input id="tripEndDate" type="date" name="end_date"></input>
+          <div class="polls-options">
+            <div>
+              <label for="eventPaid">Event Paid?
+                <input id="eventPaid" type="checkbox" name="event_paid"/>
+              </label>
+            </div>
+          </div>
+          <div class="polls-options">
+            <div>
+              <label for="flightScheduled">Flight Scheduled?
+                <input id="flightScheduled" type="checkbox" name="flight_paid"/>
+              </label>
+            </div>
+          </div>
+          <div class="polls-options">
+            <div>
+              <label for="hotelReserved">Hotel Reserved?
+                <input id="hotelReserved" type="checkbox" name="hotel_reserved"/>
+              </label>
+            </div>
+          </div>
+          <button type="submit" id='submit-trip-button' class="button">Add Trip</button>
+        <!-- </section> -->
+      </form>
+    </script>
+
+    <!-- trip info -->
+    <script id="trip-info-template" type="text/template">
+      <h3>Location: <%- location %></h3>
+      <h4>Event Name: <%- event_name %></h4>
+      <h4>Start Date: <%- start_date %></h4>
+      <h4>End Date: <%- end_date %></h4>
+      <p>Trip Details: <%- details %></p>
+      Event Paid? <% if(event_paid) { %>
+        <input type="checkbox" name="event_paid" checked="checked" />
+        <% } else { %>
+          <input type="checkbox" name="event_paid" />
+          <% } %>
+      Flight Scheduled? <% if(flight_paid) { %>
+        <input type="checkbox" name="flight_paid" checked="checked" />
+        <% } else { %>
+          <input type="checkbox" name="flight_paid" />
+          <% } %>
+      Hotel Reserved? <% if(hotel_reserved) { %>
+        <input type="checkbox" name="hotel_reserved" checked="checked" />
+        <% } else { %>
+          <input type="checkbox" name="hotel_reserved" />
+          <% } %>
+    </script>
+
+
+    <script src="build/app.bundle.js"></script>
+  </body>
+</html>
