@@ -16,6 +16,7 @@ import TripListView from './trip_list_view.js';
 const LoginView = Backbone.View.extend({
 
   initialize: function(params) {
+    this.map = params.map;
 
     console.log('Initializing Login View');
     this.template = params.template;
@@ -80,12 +81,12 @@ const LoginView = Backbone.View.extend({
           headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization")},
           success: function() {
             that.$("#add-trip-button").show();
-
             var myTripListView = new TripListView({
               travelerList: myTravelerList,
               model: myTripList,
               template: _.template($('#list-trips-template').html()),
               deetTemplate: _.template($('#trip-info-template').html()),
+              map: that.map,
               el: 'body'
             });
             myTripListView.render();

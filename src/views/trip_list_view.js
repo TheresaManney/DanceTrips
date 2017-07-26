@@ -11,6 +11,7 @@ import MapView from './map_view.js';
 
 var TripListView = Backbone.View.extend({
   initialize: function(params) {
+    this.map = params.map;
     this.$("#all-login").hide();
     $("#map").show();
 
@@ -21,14 +22,16 @@ var TripListView = Backbone.View.extend({
     this.detailsTemplate = params.deetTemplate;
     console.log(params.template);
     console.log(params.model);
-    console.log(params.model.trip);
+    // console.log(params.model.trip);
 
     var that = this;
     // var tripListModel = new TripList();
     // instantiate MapView here!
     var mapView = new MapView({
       // pass in trip list model
-      model: that.model
+      model: that.model,
+      map: that.map
+      // template: _.template($('#map-template').html())
     });
     mapView.render();
 
@@ -119,7 +122,11 @@ var TripListView = Backbone.View.extend({
           },
           error: function(data) {
             that.$("#section-trip-form").show();
-            that.$("#list-trips").empty();
+            // that.$("#list-trips").hide();
+            this.$('#trip-list').empty();
+            this.$('#trip-list').show();
+
+
 
             console.log("Trip did not save");
           }
@@ -133,7 +140,7 @@ var TripListView = Backbone.View.extend({
   getAddTripForm: function() {
     console.log("inside getAddTripForm");
     this.$('#trip-info').hide();
-    this.$("#list-trips").hide();
+    // this.$("#list-trips").hide();
     this.$("#section-trip-form").show();
     this.$("#trip-form").empty();
 
@@ -150,6 +157,7 @@ var TripListView = Backbone.View.extend({
   allTrips: function() {
     // console.log("clicked on header");
     this.$('#trip-info').empty();
+    this.$('#trip-list').empty();
     this.$('#section-trip-form').hide();
     this.$('#list-trips').show();
   }

@@ -6,6 +6,7 @@
     <link rel='stylesheet' type='text/css' href='css/_settings.css'>
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
     <link rel='stylesheet' type='text/css' href='css/styles.css'>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <title>Swing Trips</title>
 
   </head>
@@ -20,8 +21,11 @@
     </header>
     <main>
 
-      <div class="row" id="map"></div>
-      <script>
+      <!-- <div class="row" id="map"></div> -->
+      <div class="row" id="show-map">map div</div>
+      <!-- <script id='map-template' type='text/template'>
+        console.log(locations)
+
         // console.log(trip.location);
         var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
 
@@ -68,10 +72,10 @@
           });
           setMarkers(map);
         }
-      </script>
+      </script> -->
 
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAKeLRJGXxhSe6gUvUXe4_-p9iyVa8pQ&callback=initMap">
-      </script>
+      <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAKeLRJGXxhSe6gUvUXe4_-p9iyVa8pQ&callback=initMap">
+      </script> -->
 
     <section id="all-login" class="row">
       <section data-closable id="login-alert">
@@ -94,10 +98,11 @@
       </section>
     </section>
 
-      <section id="list-travelers"></section>
       <section class="row">
         <button class="button columns small-12 medium-2 large-2" id="add-trip-button">Add a Trip!</button>
       </section>
+
+      <section id="list-travelers"></section>
 
       <section id="list-trips" class="row" data-equalizer></section>
 
@@ -168,6 +173,7 @@
     <!-- add trips -->
     <script type="text/template" id="trip-form-template">
       <form>
+        <h2>Add a Trip!</h2>
           <label for="tripLocation">Location: </label>
             <input type="text" id="tripLocation" name="location"></input>
           <label for="eventName">Event Name: </label>
@@ -227,6 +233,7 @@
           <input type="checkbox" name="hotel_reserved" />
           <% } %>
     </script>
+
 
     <script src="/app.bundle.js"></script>
   </body>

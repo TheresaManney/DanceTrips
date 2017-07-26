@@ -52,7 +52,7 @@ h2 {
   overflow: scroll;
 }
 
-#map {
+#show-map {
   height: 400px;
   width: 90%;
   border: solid;
