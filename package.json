@@ -9,7 +9,7 @@
   "main": "./bin/app.bundle.js",
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
-    "start": "node ./src/app.js",
+    "start": "webpack-dashboard -- webpack-dev-server",
     "test": "jasmine"
   },
   "author": "",
@@ -34,6 +34,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "babel-cli": "^6.24.1",
     "babel-polyfill": "^6.16.0",
     "express": "^4.15.3",
     "jwt-simple": "^0.5.1"

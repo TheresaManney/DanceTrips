@@ -1,11 +1,11 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	var parentHotUpdateCallback = this["webpackHotUpdate"];
-/******/ 	this["webpackHotUpdate"] =
+/******/ 	this["webpackHotUpdate"] = 
 /******/ 	function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-line no-unused-vars
 /******/ 		hotAddUpdateChunk(chunkId, moreModules);
 /******/ 		if(parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotDownloadUpdateChunk(chunkId) { // eslint-disable-line no-unused-vars
 /******/ 		var head = document.getElementsByTagName("head")[0];
 /******/ 		var script = document.createElement("script");
@@ -14,7 +14,7 @@
 /******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
 /******/ 		head.appendChild(script);
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotDownloadManifest(callback) { // eslint-disable-line no-unused-vars
 /******/ 		if(typeof XMLHttpRequest === "undefined")
 /******/ 			return callback(new Error("No browser support"));
@@ -51,8 +51,8 @@
 /******/ 		};
 /******/ 	}
 
-/******/
-/******/
+/******/ 	
+/******/ 	
 /******/ 	// Copied from https://github.com/facebook/react/blob/bef45b0/src/shared/utils/canDefineProperty.js
 /******/ 	var canDefineProperty = false;
 /******/ 	try {
@@ -63,12 +63,12 @@
 /******/ 	} catch(x) {
 /******/ 		// IE will fail on defineProperty
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7a1fccef17fc6c32f490"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c12de5de0f402c3ecef4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
-/******/
+/******/ 	
 /******/ 	function hotCreateRequire(moduleId) { // eslint-disable-line no-unused-vars
 /******/ 		var me = installedModules[moduleId];
 /******/ 		if(!me) return __webpack_require__;
@@ -106,7 +106,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		function ensure(chunkId, callback) {
 /******/ 			if(hotStatus === "ready")
 /******/ 				hotSetStatus("prepare");
@@ -117,7 +117,7 @@
 /******/ 				} finally {
 /******/ 					finishChunkLoading();
 /******/ 				}
-/******/
+/******/ 	
 /******/ 				function finishChunkLoading() {
 /******/ 					hotChunksLoading--;
 /******/ 					if(hotStatus === "prepare") {
@@ -141,7 +141,7 @@
 /******/ 		}
 /******/ 		return fn;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotCreateModule(moduleId) { // eslint-disable-line no-unused-vars
 /******/ 		var hot = {
 /******/ 			// private stuff
@@ -150,7 +150,7 @@
 /******/ 			_selfAccepted: false,
 /******/ 			_selfDeclined: false,
 /******/ 			_disposeHandlers: [],
-/******/
+/******/ 	
 /******/ 			// Module API
 /******/ 			active: true,
 /******/ 			accept: function(dep, callback) {
@@ -183,7 +183,7 @@
 /******/ 				var idx = hot._disposeHandlers.indexOf(callback);
 /******/ 				if(idx >= 0) hot._disposeHandlers.splice(idx, 1);
 /******/ 			},
-/******/
+/******/ 	
 /******/ 			// Management API
 /******/ 			check: hotCheck,
 /******/ 			apply: hotApply,
@@ -198,22 +198,22 @@
 /******/ 				var idx = hotStatusHandlers.indexOf(l);
 /******/ 				if(idx >= 0) hotStatusHandlers.splice(idx, 1);
 /******/ 			},
-/******/
+/******/ 	
 /******/ 			//inherit from previous dispose call
 /******/ 			data: hotCurrentModuleData[moduleId]
 /******/ 		};
 /******/ 		return hot;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	var hotStatusHandlers = [];
 /******/ 	var hotStatus = "idle";
-/******/
+/******/ 	
 /******/ 	function hotSetStatus(newStatus) {
 /******/ 		hotStatus = newStatus;
 /******/ 		for(var i = 0; i < hotStatusHandlers.length; i++)
 /******/ 			hotStatusHandlers[i].call(null, newStatus);
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	// while downloading
 /******/ 	var hotWaitingFiles = 0;
 /******/ 	var hotChunksLoading = 0;
@@ -221,15 +221,15 @@
 /******/ 	var hotRequestedFilesMap = {};
 /******/ 	var hotAvailibleFilesMap = {};
 /******/ 	var hotCallback;
-/******/
+/******/ 	
 /******/ 	// The update info
 /******/ 	var hotUpdate, hotUpdateNewHash;
-/******/
+/******/ 	
 /******/ 	function toModuleId(id) {
 /******/ 		var isNumber = (+id) + "" === id;
 /******/ 		return isNumber ? +id : id;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotCheck(apply, callback) {
 /******/ 		if(hotStatus !== "idle") throw new Error("check() is only allowed in idle status");
 /******/ 		if(typeof apply === "function") {
@@ -249,14 +249,14 @@
 /******/ 				callback(null, null);
 /******/ 				return;
 /******/ 			}
-/******/
+/******/ 	
 /******/ 			hotRequestedFilesMap = {};
 /******/ 			hotAvailibleFilesMap = {};
 /******/ 			hotWaitingFilesMap = {};
 /******/ 			for(var i = 0; i < update.c.length; i++)
 /******/ 				hotAvailibleFilesMap[update.c[i]] = true;
 /******/ 			hotUpdateNewHash = update.h;
-/******/
+/******/ 	
 /******/ 			hotSetStatus("prepare");
 /******/ 			hotCallback = callback;
 /******/ 			hotUpdate = {};
@@ -270,7 +270,7 @@
 /******/ 			}
 /******/ 		});
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotAddUpdateChunk(chunkId, moreModules) { // eslint-disable-line no-unused-vars
 /******/ 		if(!hotAvailibleFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
 /******/ 			return;
@@ -284,7 +284,7 @@
 /******/ 			hotUpdateDownloaded();
 /******/ 		}
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotEnsureUpdateChunk(chunkId) {
 /******/ 		if(!hotAvailibleFilesMap[chunkId]) {
 /******/ 			hotWaitingFilesMap[chunkId] = true;
@@ -294,7 +294,7 @@
 /******/ 			hotDownloadUpdateChunk(chunkId);
 /******/ 		}
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotUpdateDownloaded() {
 /******/ 		hotSetStatus("ready");
 /******/ 		var callback = hotCallback;
@@ -312,7 +312,7 @@
 /******/ 			callback(null, outdatedModules);
 /******/ 		}
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotApply(options, callback) {
 /******/ 		if(hotStatus !== "ready") throw new Error("apply() is only allowed in ready status");
 /******/ 		if(typeof options === "function") {
@@ -328,11 +328,11 @@
 /******/ 				if(err) throw err;
 /******/ 			};
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		function getAffectedStuff(module) {
 /******/ 			var outdatedModules = [module];
 /******/ 			var outdatedDependencies = {};
-/******/
+/******/ 	
 /******/ 			var queue = outdatedModules.slice();
 /******/ 			while(queue.length > 0) {
 /******/ 				var moduleId = queue.pop();
@@ -363,10 +363,10 @@
 /******/ 					queue.push(parentId);
 /******/ 				}
 /******/ 			}
-/******/
+/******/ 	
 /******/ 			return [outdatedModules, outdatedDependencies];
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		function addAllToSet(a, b) {
 /******/ 			for(var i = 0; i < b.length; i++) {
 /******/ 				var item = b[i];
@@ -374,7 +374,7 @@
 /******/ 					a.push(item);
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// at begin all updates modules are outdated
 /******/ 		// the "outdated" status can propagate to parents if they don't accept the children
 /******/ 		var outdatedDependencies = {};
@@ -405,7 +405,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Store self accepted outdated modules to require them later by the module system
 /******/ 		var outdatedSelfAcceptedModules = [];
 /******/ 		for(var i = 0; i < outdatedModules.length; i++) {
@@ -416,7 +416,7 @@
 /******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
 /******/ 				});
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Now in "dispose" phase
 /******/ 		hotSetStatus("dispose");
 /******/ 		var queue = outdatedModules.slice();
@@ -424,9 +424,9 @@
 /******/ 			var moduleId = queue.pop();
 /******/ 			var module = installedModules[moduleId];
 /******/ 			if(!module) continue;
-/******/
+/******/ 	
 /******/ 			var data = {};
-/******/
+/******/ 	
 /******/ 			// Call dispose handlers
 /******/ 			var disposeHandlers = module.hot._disposeHandlers;
 /******/ 			for(var j = 0; j < disposeHandlers.length; j++) {
@@ -434,13 +434,13 @@
 /******/ 				cb(data);
 /******/ 			}
 /******/ 			hotCurrentModuleData[moduleId] = data;
-/******/
+/******/ 	
 /******/ 			// disable module (this disables requires from this module)
 /******/ 			module.hot.active = false;
-/******/
+/******/ 	
 /******/ 			// remove module from cache
 /******/ 			delete installedModules[moduleId];
-/******/
+/******/ 	
 /******/ 			// remove "parents" references from all children
 /******/ 			for(var j = 0; j < module.children.length; j++) {
 /******/ 				var child = installedModules[module.children[j]];
@@ -451,7 +451,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// remove outdated dependency from module children
 /******/ 		for(var moduleId in outdatedDependencies) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)) {
@@ -464,19 +464,19 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Not in "apply" phase
 /******/ 		hotSetStatus("apply");
-/******/
+/******/ 	
 /******/ 		hotCurrentHash = hotUpdateNewHash;
-/******/
+/******/ 	
 /******/ 		// insert new code
 /******/ 		for(var moduleId in appliedUpdate) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
 /******/ 				modules[moduleId] = appliedUpdate[moduleId];
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// call accept handlers
 /******/ 		var error = null;
 /******/ 		for(var moduleId in outdatedDependencies) {
@@ -501,7 +501,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Load self accepted modules
 /******/ 		for(var i = 0; i < outdatedSelfAcceptedModules.length; i++) {
 /******/ 			var item = outdatedSelfAcceptedModules[i];
@@ -521,13 +521,13 @@
 /******/ 					error = err;
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// handle errors in accept handlers and self accepted module load
 /******/ 		if(error) {
 /******/ 			hotSetStatus("fail");
 /******/ 			return callback(error);
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		hotSetStatus("idle");
 /******/ 		callback(null, outdatedModules);
 /******/ 	}
@@ -1126,7 +1126,7 @@
 	$export.B = 16;  // bind
 	$export.W = 32;  // wrap
 	$export.U = 64;  // safe
-	$export.R = 128; // real proto method for `library`
+	$export.R = 128; // real proto method for `library` 
 	module.exports = $export;
 
 /***/ }),
@@ -2571,7 +2571,7 @@
 	})), 'Number', {
 	  toPrecision: function toPrecision(precision){
 	    var that = aNumberValue(this, 'Number#toPrecision: incorrect invocation!');
-	    return precision === undefined ? $toPrecision.call(that) : $toPrecision.call(that, precision);
+	    return precision === undefined ? $toPrecision.call(that) : $toPrecision.call(that, precision); 
 	  }
 	});
 
@@ -2695,7 +2695,7 @@
 	$export($export.S + $export.F * !($acosh
 	  // V8 bug: https://code.google.com/p/v8/issues/detail?id=3509
 	  && Math.floor($acosh(Number.MAX_VALUE)) == 710
-	  // Tor Browser bug: Math.acosh(Infinity) -> NaN
+	  // Tor Browser bug: Math.acosh(Infinity) -> NaN 
 	  && $acosh(Infinity) == Infinity
 	), 'Math', {
 	  acosh: function acosh(x){
@@ -2726,7 +2726,7 @@
 	  return !isFinite(x = +x) || x == 0 ? x : x < 0 ? -asinh(-x) : Math.log(x + Math.sqrt(x * x + 1));
 	}
 
-	// Tor Browser bug: Math.asinh(0) -> -0
+	// Tor Browser bug: Math.asinh(0) -> -0 
 	$export($export.S + $export.F * !($asinh && 1 / $asinh(0) > 0), 'Math', {asinh: asinh});
 
 /***/ }),
@@ -2737,7 +2737,7 @@
 	var $export = __webpack_require__(8)
 	  , $atanh  = Math.atanh;
 
-	// Tor Browser bug: Math.atanh(-0) -> 0
+	// Tor Browser bug: Math.atanh(-0) -> 0 
 	$export($export.S + $export.F * !($atanh && 1 / $atanh(-0) < 0), 'Math', {
 	  atanh: function atanh(x){
 	    return (x = +x) == 0 ? x : Math.log((1 + x) / (1 - x)) / 2;
@@ -5334,7 +5334,7 @@
 	        while(index--)$instance[ADDER](index, index);
 	        return !$instance.has(-0);
 	      });
-	    if(!ACCEPT_ITERABLES){
+	    if(!ACCEPT_ITERABLES){ 
 	      C = wrapper(function(target, iterable){
 	        anInstance(target, C, NAME);
 	        var that = inheritIfRequired(new Base, target, C);
@@ -8774,12 +8774,13 @@
 
 	  // $(function() {
 	  var App = new AppView();
-	  console.log(App.map);
+	  // console.log(App.map);
 	  // });
 	  // console.log(App._initialize_map());
 
 	  (0, _jquery2.default)("#add-trip-button").hide();
 	  (0, _jquery2.default)('#section-trip-form').hide();
+	  (0, _jquery2.default)('#nav-bar').hide();
 
 	  // create conditional that will check if there has been a token set... might use logic from loginView
 
@@ -22585,7 +22586,8 @@
 
 	var TravelerList = Backbone.Collection.extend({
 	  model: _traveler2.default,
-	  url: 'https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers'
+	  url: 'http://localhost:3000/travelers'
+	  // url: 'http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers'
 	});
 
 	exports.default = TravelerList;
@@ -22797,7 +22799,8 @@
 	      }
 	    };
 	    var loginTraveler = new _login2.default();
-	    loginTraveler.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/traveler_token";
+	    loginTraveler.url = 'http://localhost:3000/traveler_token';
+	    // loginTraveler.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/traveler_token";
 	    loginTraveler.save(formDetails, {
 	      success: function success(data) {
 
@@ -22829,6 +22832,7 @@
 	          headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Authorization") },
 	          success: function success() {
 	            that.$("#add-trip-button").show();
+	            that.$('#nav-bar').show();
 	            var myTripListView = new _trip_list_view2.default({
 	              travelerList: myTravelerList,
 	              model: myTripList,
@@ -22901,7 +22905,8 @@
 
 	var TripList = Backbone.Collection.extend({
 	  model: _trip2.default,
-	  url: 'https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips'
+	  url: 'http://localhost:3000/trips'
+	  // url: 'http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips'
 	});
 
 	exports.default = TripList;
@@ -22953,6 +22958,7 @@
 	var TripListView = Backbone.View.extend({
 	  initialize: function initialize(params) {
 	    this.map = params.map;
+	    // this.model.on('add', this.addedTrip, this);
 	    this.$("#all-login").hide();
 	    (0, _jquery2.default)("#map").show();
 
@@ -22961,32 +22967,38 @@
 	    // console.log(params.model.traveler);
 	    this.template = params.template;
 	    this.detailsTemplate = params.deetTemplate;
-	    console.log(params.template);
-	    console.log(params.model);
-	    // console.log(params.model.trip);
+	    // console.log(params.template);
+	    // console.log(params.model);
+	    //
+	    // console.log(this);
 
 	    var that = this;
-	    // var tripListModel = new TripList();
-	    // instantiate MapView here!
+
 	    var mapView = new _map_view2.default({
-	      // pass in trip list model
 	      model: that.model,
 	      map: that.map
-	      // template: _.template($('#map-template').html())
 	    });
-	    mapView.render();
+	    // mapView.render();
 
 	    this.traveler = params.travelerList;
 
-	    // this.model = params.model.trip;
 	    this.listenTo(this.model, "update", this.render);
-	    // trying to listenTo change for when a trip is added
+
 	    this.listenTo(this.model, 'change', this.render);
+
+	    // this.listenTo(this.model, 'change', function(){
+	    //   console.log("test....");
+	    //   new MapView({
+	    //     model: that.model,
+	    //     map: that.map
+	    //   });
+	    // });
+
 	    this.$("#all-login").hide();
 	  },
 	  render: function render() {
-	    (0, _jquery2.default)('#section-trip-form').hide();
-
+	    this.$('#section-trip-form').hide();
+	    this.$('#list-trips').empty();
 	    console.log(">>> Breadcrum #2");
 	    var that = this;
 	    console.log(this.model.length);
@@ -23003,15 +23015,17 @@
 	  events: {
 	    'click #add-trip-button': 'getAddTripForm',
 	    'click #submit-trip-button': 'addTrip',
-	    'click header': 'allTrips'
+	    'click #home': 'allTrips',
+	    'click #logout': 'logoutTraveler'
 	  },
 	  tripDetails: function tripDetails(trip) {
 	    this.$('#list-trips').hide();
 	    this.$('#trip-info').show();
-
+	    console.log(this.$('#list-trips'));
 	    var showTripDetails = this.detailsTemplate(trip.attributes);
 	    console.log(showTripDetails);
 	    this.$('#trip-info').append(showTripDetails);
+	    console.log(this.$('#list-trips'));
 	  },
 	  addTrip: function addTrip(event) {
 	    event.preventDefault();
@@ -23050,21 +23064,24 @@
 	        console.log("successful authorization for adding a trip");
 	        // console.log(this.model);
 	        var newTrip = new _trip2.default(tripDetails);
-	        // newTrip.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips";
-
+	        // newTrip.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips";
+	        newTrip.url = 'http://localhost:3000/trips';
 	        newTrip.save(tripDetails, {
 	          success: function success(data) {
 	            console.log("Trip created");
-	            that.$("#section-trip-form").hide();
-	            that.$("#list-trips").empty();
-	            that.$("#list-trips").show();
+
+	            that.allTrips();
+
 	            that.model.add(newTrip);
+
+	            new _map_view2.default({
+	              model: that.model,
+	              map: that.map
+	            });
 	          },
 	          error: function error(data) {
 	            that.$("#section-trip-form").show();
-	            // that.$("#list-trips").hide();
-	            that.$("#list-trips").empty();
-	            that.$("#list-trips").show();
+
 	            console.log("Trip did not save");
 	          }
 	        });
@@ -23076,10 +23093,12 @@
 	  },
 	  getAddTripForm: function getAddTripForm() {
 	    console.log("inside getAddTripForm");
-	    // this.$('#trip-info').hide();
-	    // this.$("#list-trips").hide();
+	    this.$('#trip-info').empty();
+
+	    this.$("#list-trips").hide();
 	    this.$("#section-trip-form").show();
-	    // this.$("#trip-form").empty();
+	    this.$("#trip-form").show();
+	    this.$("#trip-form").empty();
 
 	    var newTrip = new _trip2.default();
 
@@ -23088,15 +23107,24 @@
 	      template: _underscore2.default.template((0, _jquery2.default)("#trip-form-template").html()),
 	      el: 'body'
 	    });
-	    // this.$("#trip-form").append(tripForm.render().$el);
 	    tripForm.render();
 	  },
+	  // addedTrip: function(trip) {
+	  //   console.log("hit addedTrip");
+	  //   var markerView = new MapView({map: this.map});
+	  // },
 	  allTrips: function allTrips() {
-	    // console.log("clicked on header");
+	    console.log("clicked on home");
+	    console.log(this);
 	    this.$('#section-trip-form').hide();
 	    this.$('#trip-info').empty();
-	    // this.$('#list-trips').empty();
+
+	    console.log(this.$('#list-trips'));
 	    this.$('#list-trips').show();
+	  },
+	  logoutTraveler: function logoutTraveler() {
+	    console.log("clicked logout button");
+	    window.location.reload();
 	  }
 	});
 
@@ -23111,6 +23139,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _backbone = __webpack_require__(301);
+
+	var _backbone2 = _interopRequireDefault(_backbone);
 
 	var _underscore = __webpack_require__(299);
 
@@ -23130,10 +23162,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import Backbone from 'backbone';
-	var Backbone = __webpack_require__(301);
+	// const Backbone = require('backbone');
 
-	var TripView = Backbone.View.extend({
+	var TripView = _backbone2.default.View.extend({
 	  initialize: function initialize(params) {
 	    this.template = params.template;
 	    this.listenTo(this.model, 'change', this.render);
@@ -23191,9 +23222,10 @@
 	  initialize: function initialize(params) {
 	    // this.collection = travelerTrips;
 	    // console.log(this.collection);
-	    // this.model = params.model;
+	    this.model = params.model;
+	    console.log(this.model);
 	    this.template = params.template;
-	    // this.listenTo(this.model, "update", this.render);
+	    this.listenTo(this.model, "update", this.render);
 	  },
 	  render: function render() {
 	    console.log("Inside AddTripFormView render");
@@ -23245,10 +23277,6 @@
 	// import Backbone from 'backbone';
 	var Backbone = __webpack_require__(301);
 
-	// 1. Create a variable that will hold all the trip locations
-	// Consol.log will show all locations
-	// 2. In trip_list_view.js, render the map with all the trips
-
 	var MapView = Backbone.View.extend({
 	  initialize: function initialize(params) {
 	    var self = this;
@@ -23287,7 +23315,7 @@
 
 	      for (var j = 0; j < geocodeArray.length; j++) {
 	        var locations = geocodeArray[j];
-	        console.log(locations[0]);
+	        // console.log(locations[0]);
 	        var marker = new google.maps.Marker({
 	          map: self.map,
 	          position: { lat: locations[0], lng: locations[1] },
@@ -23296,92 +23324,7 @@
 	      }
 	    });
 	    var map = self.map;
-	    // };
 	  }
-
-	  // //  el: $('#map'),
-	  //
-	  //
-	  // initialize: function(params) {
-	  //   console.log("MapView initialize");
-	  //   var firstLocation = this.model.models[0].attributes.location;
-	  //   console.log(firstLocation);
-	  //   // this.template = params.template;
-	  //   // console.log(this.template);
-	  //
-	  //   // gets all locations
-	  //   var locations = [];
-	  //   for (var i = 0; i < this.model.length; i++) {
-	  //     locations.push(this.model.models[i].attributes.location);
-	  //   }
-	  //   console.log(locations);
-	  //   this.locations = locations;
-	  // },
-	  // render: function() {
-	  //
-	  //   console.log(this.locations.length);
-	  //   console.log(this.model);
-	  //
-	  //   // var compiledTemplate = this.template({locations: this.locations});
-	  //   // this.$('#map').html(compiledTemplate);
-	  //   // return this;
-	  //   console.log("MapView render");
-	  //   var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-	  //
-	  //   console.log(this.locations);
-	  //
-	  //   window.getLocation = function(location) {
-	  //     url = baseUrl + encodeURI(location);
-	  //
-	  //     return $.get(url);
-	  //   };
-	  //
-	  //   window.setMarkers = function(map) {
-	  //     var geocodeArray = [];
-	  //     var requests = $.map(this.locations, getLocation);
-	  //
-	  //     $.when.apply(null, requests).then(function(...location) {
-	  //       for (var i = 0; i < location.length; i++) {
-	  //         geocodeArray.push([location[i][0].results[0].geometry.location.lat, location[i][0].results[0].geometry.location.lng]);
-	  //       }
-	  //       console.log(geocodeArray);
-	  //
-	  //       for (var j = 0; j < geocodeArray.length; j++) {
-	  //         var locations = geocodeArray[i];
-	  //
-	  //         var marker = new google.maps.Marker({
-	  //           position: {lat: locations[0], lng: locations[1]},
-	  //           map: show-map
-	  //         });
-	  //       }
-	  //     });
-	  //   };
-	  //   window.initMap = function() {
-	  //     // display of map
-	  //     var map = new google.maps.Map(document.getElementById('map'), {
-	  //       zoom: 2,
-	  //       center: new google.maps.LatLng(20.397, -5.644)
-	  //     });
-	  //     setMarkers(map);
-	  //   };
-	  //   var mapUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAKeLRJGXxhSe6gUvUXe4_-p9iyVa8pQ&callback=initMap";
-	  //   // return $.ajax({
-	  //   //   beforeSend: function(xhrObj) {
-	  //   //     xhrObj.setRequestHeader("Access-Control-Allow-Origin", "*");
-	  //   //   },
-	  //   //   url: mapUrl,
-	  //   //   type: "GET",
-	  //   //   dataType: 'jsonp',
-	  //   //   success: function(response){
-	  //   //     console.log(response);
-	  //   //   },
-	  //   //   error: function(response) {
-	  //   //     console.log(response);
-	  //   //   }
-	  //   // });
-	  //
-	  //   // document.write("<script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAKeLRJGXxhSe6gUvUXe4_-p9iyVa8pQ&callback=initMap'></script>");
-	  // }
 	});
 
 	exports.default = MapView;
@@ -23462,7 +23405,8 @@
 
 	    var that = this;
 	    var newTraveler = new _traveler2.default(travelerDetails);
-	    newTraveler.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers";
+	    newTraveler.url = 'http://localhost:3000/travelers';
+	    // newTraveler.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers";
 	    newTraveler.save(travelerDetails, {
 	      success: function success(data) {
 	        console.log(data);
