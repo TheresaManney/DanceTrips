@@ -154,7 +154,7 @@ $(document).ready(function() {
 
   // $(function() {
   var App = new AppView();
-  console.log(App.map);
+  // console.log(App.map);
   // });
   // console.log(App._initialize_map());
 

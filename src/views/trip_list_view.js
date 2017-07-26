@@ -13,6 +13,7 @@ import MapView from './map_view.js';
 var TripListView = Backbone.View.extend({
   initialize: function(params) {
     this.map = params.map;
+    // this.model.on('add', this.addedTrip, this);
     this.$("#all-login").hide();
     $("#map").show();
 
@@ -21,35 +22,38 @@ var TripListView = Backbone.View.extend({
     // console.log(params.model.traveler);
     this.template = params.template;
     this.detailsTemplate = params.deetTemplate;
-    console.log(params.template);
-    console.log(params.model);
-    // console.log(params.model.trip);
-
-    console.log(this);
+    // console.log(params.template);
+    // console.log(params.model);
+    //
+    // console.log(this);
 
     var that = this;
-    // var tripListModel = new TripList();
-    // instantiate MapView here!
+
     var mapView = new MapView({
-      // pass in trip list model
       model: that.model,
       map: that.map
-      // template: _.template($('#map-template').html())
     });
-    mapView.render();
-
+    // mapView.render();
 
     this.traveler = params.travelerList;
 
-    // this.model = params.model.trip;
     this.listenTo(this.model, "update", this.render);
-    // trying to listenTo change for when a trip is added
+
     this.listenTo(this.model, 'change', this.render);
+
+    // this.listenTo(this.model, 'change', function(){
+    //   console.log("test....");
+    //   new MapView({
+    //     model: that.model,
+    //     map: that.map
+    //   });
+    // });
+
     this.$("#all-login").hide();
   },
   render: function() {
-    $('#section-trip-form').hide();
-
+    this.$('#section-trip-form').hide();
+    this.$('#list-trips').empty();
     console.log(">>> Breadcrum #2");
     var that = this;
     console.log(this.model.length);
@@ -66,7 +70,8 @@ var TripListView = Backbone.View.extend({
   events: {
     'click #add-trip-button' : 'getAddTripForm',
     'click #submit-trip-button' : 'addTrip',
-    'click #home' : 'allTrips'
+    'click #home' : 'allTrips',
+    'click #logout' : 'logoutTraveler'
   },
   tripDetails: function(trip) {
     this.$('#list-trips').hide();
@@ -120,17 +125,19 @@ var TripListView = Backbone.View.extend({
         newTrip.save(tripDetails, {
           success: function(data) {
             console.log("Trip created");
-            // that.$("#section-trip-form").hide();
-            // that.$("#list-trips").empty();
-            // that.$("#list-trips").show();
+
             that.allTrips();
+
             that.model.add(newTrip);
+
+            new MapView({
+              model: that.model,
+              map: that.map
+            });
           },
           error: function(data) {
             that.$("#section-trip-form").show();
-            // that.$("#list-trips").hide();
-            // that.$("#list-trips").empty();
-            // that.$("#list-trips").show();
+
             console.log("Trip did not save");
           }
         });
@@ -142,9 +149,8 @@ var TripListView = Backbone.View.extend({
   },
   getAddTripForm: function() {
     console.log("inside getAddTripForm");
-    // this.$('#trip-info').hide();
     this.$('#trip-info').empty();
-    
+
     this.$("#list-trips").hide();
     this.$("#section-trip-form").show();
     this.$("#trip-form").show();
@@ -157,30 +163,24 @@ var TripListView = Backbone.View.extend({
       template: _.template($("#trip-form-template").html()),
       el: 'body'
     });
-    // this.$("#trip-form").append(tripForm.render().$el);
     tripForm.render();
   },
+  // addedTrip: function(trip) {
+  //   console.log("hit addedTrip");
+  //   var markerView = new MapView({map: this.map});
+  // },
   allTrips: function() {
-    // event.preventDefault();
-
     console.log("clicked on home");
     console.log(this);
     this.$('#section-trip-form').hide();
     this.$('#trip-info').empty();
-    //this.$('#list-trips').empty();
 
     console.log(this.$('#list-trips'));
     this.$('#list-trips').show();
-    // var that = this;
-    // this.model.fetch( {
-    //   headers: {'Authorization' : 'Bearer ' + localStorage.getItem("Authorization") },
-    //   success: function(data) {
-    //     that.$('#section-trip-form').hide();
-    //     // that.$('#trip-info').hide();
-    //     that.$('#list-trips').empty();
-    //     that.$('#list-trips').show();
-    //   }
-    // });
+  },
+  logoutTraveler: function() {
+    console.log("clicked logout button");
+    window.location.reload();
   }
 });
 
