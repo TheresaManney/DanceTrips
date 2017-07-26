@@ -43,7 +43,7 @@ var MapView = Backbone.View.extend({
 
       for (var j = 0; j < geocodeArray.length; j++) {
         var locations = geocodeArray[j];
-        console.log(locations[0]);
+        // console.log(locations[0]);
         var marker = new google.maps.Marker({
           map: self.map,
           position: {lat: locations[0], lng: locations[1]},
