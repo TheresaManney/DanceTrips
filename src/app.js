@@ -1,4 +1,5 @@
-import Backbone from 'backbone';
+// import Backbone from 'backbone';
+const Backbone = require('backbone');
 import $ from 'jquery';
 import _ from 'underscore';
 
@@ -166,7 +167,7 @@ $(document).ready(function() {
   var signupView = new SignupView({
     model: traveler,
     template: _.template($('#sign-up-template').html()),
-    el: 'main'
+    el: 'body'
   });
   signupView.render();
 

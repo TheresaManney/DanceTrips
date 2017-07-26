@@ -1,6 +1,5 @@
-
-
-import Backbone from 'backbone';
+// import Backbone from 'backbone';
+const Backbone = require('backbone');
 import _ from 'underscore';
 import $ from 'jquery';
 
@@ -49,7 +48,7 @@ const LoginView = Backbone.View.extend({
       }
     };
     var loginTraveler = new Login();
-    loginTraveler.url = "http://localhost:3000/traveler_token";
+    loginTraveler.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/traveler_token";
     loginTraveler.save(formDetails,  {
       success: function(data) {
 

@@ -1,4 +1,6 @@
-import Backbone from 'backbone';
+// import Backbone from 'backbone';
+const Backbone = require('backbone');
+
 
 var Trip = Backbone.Model.extend({
   // defaults: {

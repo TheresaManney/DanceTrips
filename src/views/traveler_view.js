@@ -1,4 +1,5 @@
-import Backbone from 'backbone';
+// import Backbone from 'backbone';
+const Backbone = require('backbone');
 import _ from 'underscore';
 import $ from 'jquery';
 

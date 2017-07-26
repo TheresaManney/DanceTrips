@@ -1,4 +1,6 @@
-import Backbone from 'backbone';
+// import Backbone from 'backbone';
+const Backbone = require('backbone');
+
 import _ from 'underscore';
 import $ from 'jquery';
 
@@ -47,7 +49,7 @@ const SignupView = Backbone.View.extend({
 
     var that = this;
     var newTraveler = new Traveler(travelerDetails);
-    newTraveler.url = "http://localhost:3000/travelers";
+    newTraveler.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers";
     newTraveler.save(travelerDetails, {
       success: function(data) {
         console.log(data);

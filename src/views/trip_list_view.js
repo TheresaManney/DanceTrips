@@ -1,4 +1,5 @@
-import Backbone from 'backbone';
+// import Backbone from 'backbone';
+const Backbone = require('backbone');
 import _ from 'underscore';
 import $ from 'jquery';
 
@@ -110,7 +111,7 @@ var TripListView = Backbone.View.extend({
         console.log("successful authorization for adding a trip");
         // console.log(this.model);
         var newTrip = new Trip(tripDetails);
-        newTrip.url = "http://localhost:3000/trips";
+        // newTrip.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips";
 
         newTrip.save(tripDetails, {
           success: function(data) {
@@ -123,11 +124,8 @@ var TripListView = Backbone.View.extend({
           error: function(data) {
             that.$("#section-trip-form").show();
             // that.$("#list-trips").hide();
-            this.$('#trip-list').empty();
-            this.$('#trip-list').show();
-
-
-
+            that.$("#list-trips").empty();
+            that.$("#list-trips").show();
             console.log("Trip did not save");
           }
         });
@@ -139,10 +137,10 @@ var TripListView = Backbone.View.extend({
   },
   getAddTripForm: function() {
     console.log("inside getAddTripForm");
-    this.$('#trip-info').hide();
+    // this.$('#trip-info').hide();
     // this.$("#list-trips").hide();
     this.$("#section-trip-form").show();
-    this.$("#trip-form").empty();
+    // this.$("#trip-form").empty();
 
     var newTrip = new Trip();
 
@@ -156,9 +154,9 @@ var TripListView = Backbone.View.extend({
   },
   allTrips: function() {
     // console.log("clicked on header");
-    this.$('#trip-info').empty();
-    this.$('#trip-list').empty();
     this.$('#section-trip-form').hide();
+    this.$('#trip-info').empty();
+    // this.$('#list-trips').empty();
     this.$('#list-trips').show();
   }
 });
