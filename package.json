@@ -4,7 +4,8 @@
   "description": "",
   "main": "./bin/app.bundle.js",
   "scripts": {
-    "start": "webpack-dashboard -- webpack-dev-server",
+    "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+    "start": "node ./src/app.js",
     "test": "jasmine"
   },
   "author": "",
