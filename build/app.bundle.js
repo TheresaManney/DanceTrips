@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c12de5de0f402c3ecef4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8775dc08a447adb58b7b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -22586,8 +22586,7 @@
 
 	var TravelerList = Backbone.Collection.extend({
 	  model: _traveler2.default,
-	  url: 'http://localhost:3000/travelers'
-	  // url: 'http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers'
+	  url: 'https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers'
 	});
 
 	exports.default = TravelerList;
@@ -22799,8 +22798,7 @@
 	      }
 	    };
 	    var loginTraveler = new _login2.default();
-	    loginTraveler.url = 'http://localhost:3000/traveler_token';
-	    // loginTraveler.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/traveler_token";
+	    loginTraveler.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/traveler_token";
 	    loginTraveler.save(formDetails, {
 	      success: function success(data) {
 
@@ -22905,8 +22903,7 @@
 
 	var TripList = Backbone.Collection.extend({
 	  model: _trip2.default,
-	  url: 'http://localhost:3000/trips'
-	  // url: 'http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips'
+	  url: 'https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips'
 	});
 
 	exports.default = TripList;
@@ -23064,8 +23061,7 @@
 	        console.log("successful authorization for adding a trip");
 	        // console.log(this.model);
 	        var newTrip = new _trip2.default(tripDetails);
-	        // newTrip.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips";
-	        newTrip.url = 'http://localhost:3000/trips';
+	        newTrip.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips";
 	        newTrip.save(tripDetails, {
 	          success: function success(data) {
 	            console.log("Trip created");
@@ -23405,8 +23401,7 @@
 
 	    var that = this;
 	    var newTraveler = new _traveler2.default(travelerDetails);
-	    newTraveler.url = 'http://localhost:3000/travelers';
-	    // newTraveler.url = "http://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers";
+	    newTraveler.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers";
 	    newTraveler.save(travelerDetails, {
 	      success: function success(data) {
 	        console.log(data);
