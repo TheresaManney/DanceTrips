@@ -39,7 +39,7 @@ var MapView = Backbone.View.extend({
       console.log(location[0].results[0]);
       // console.log(location[0][0].results[0].geometry.location.lat);
       for (var i = 0; i < location.length; i++) {
-        geocodeArray.push([location[i][0].results[0].geometry.location.lat, location[i][0].results[0].geometry.location.lng]);
+        geocodeArray.push([location[i].results[0].geometry.location.lat, location[i].results[0].geometry.location.lng]);
       }
       console.log(geocodeArray);
 
