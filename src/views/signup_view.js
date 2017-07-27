@@ -50,6 +50,7 @@ const SignupView = Backbone.View.extend({
     var that = this;
     var newTraveler = new Traveler(travelerDetails);
     newTraveler.url = "https://route.triptrackerapi.com/travelers";
+    // newTraveler.url = 'http://localhost:3000/travelers';
     newTraveler.save(travelerDetails, {
       success: function(data) {
         console.log(data);

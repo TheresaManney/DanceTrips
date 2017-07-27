@@ -49,6 +49,7 @@ const LoginView = Backbone.View.extend({
     };
     var loginTraveler = new Login();
     loginTraveler.url = "https://route.triptrackerapi.com/traveler_token";
+    // loginTraveler.url = 'http://localhost:3000/traveler_token';
     loginTraveler.save(formDetails,  {
       success: function(data) {
 

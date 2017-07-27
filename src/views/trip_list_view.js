@@ -121,6 +121,7 @@ var TripListView = Backbone.View.extend({
         // console.log(this.model);
         var newTrip = new Trip(tripDetails);
         newTrip.url = "https://route.triptrackerapi.com/trips";
+        // newTrip.url = 'http://localhost:3000/trips';
         newTrip.save(tripDetails, {
           success: function(data) {
             console.log("Trip created");
