@@ -36,6 +36,8 @@ var MapView = Backbone.View.extend({
     var requests = $.map(locations, getLocation);
 
     $.when.apply(null, requests).then(function(...location) {
+      console.log(location);
+      // console.log(location[0][0].results[0].geometry.location.lat);
       for (var i = 0; i < location.length; i++) {
         geocodeArray.push([location[i][0].results[0].geometry.location.lat, location[i][0].results[0].geometry.location.lng]);
       }
