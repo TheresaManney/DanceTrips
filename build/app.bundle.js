@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e9151812e4273eae5c39"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7229685ce5ad89f5a085"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -22587,6 +22587,7 @@
 	var TravelerList = Backbone.Collection.extend({
 	  model: _traveler2.default,
 	  url: 'https://route.triptrackerapi.com/travelers'
+	  // url: 'http://localhost:3000/travelers'
 	});
 
 	exports.default = TravelerList;
@@ -22799,6 +22800,7 @@
 	    };
 	    var loginTraveler = new _login2.default();
 	    loginTraveler.url = "https://route.triptrackerapi.com/traveler_token";
+	    // loginTraveler.url = 'http://localhost:3000/traveler_token';
 	    loginTraveler.save(formDetails, {
 	      success: function success(data) {
 
@@ -22903,7 +22905,8 @@
 
 	var TripList = Backbone.Collection.extend({
 	  model: _trip2.default,
-	  url: 'https://route.triptrackerapi.com/trips'
+	  // url: 'https://route.triptrackerapi.com/trips'
+	  url: 'http://localhost:3000/trips'
 	});
 
 	exports.default = TripList;
@@ -23061,7 +23064,8 @@
 	        console.log("successful authorization for adding a trip");
 	        // console.log(this.model);
 	        var newTrip = new _trip2.default(tripDetails);
-	        newTrip.url = "https://route.triptrackerapi.com/trips";
+	        // newTrip.url = "https://route.triptrackerapi.com/trips";
+	        newTrip.url = 'http://localhost:3000/trips';
 	        newTrip.save(tripDetails, {
 	          success: function success(data) {
 	            console.log("Trip created");
@@ -23304,6 +23308,8 @@
 	        location[_key] = arguments[_key];
 	      }
 
+	      console.log(location);
+	      // console.log(location[0][0].results[0].geometry.location.lat);
 	      for (var i = 0; i < location.length; i++) {
 	        geocodeArray.push([location[i][0].results[0].geometry.location.lat, location[i][0].results[0].geometry.location.lng]);
 	      }
@@ -23402,6 +23408,7 @@
 	    var that = this;
 	    var newTraveler = new _traveler2.default(travelerDetails);
 	    newTraveler.url = "https://route.triptrackerapi.com/travelers";
+	    // newTraveler.url = 'http://localhost:3000/travelers';
 	    newTraveler.save(travelerDetails, {
 	      success: function success(data) {
 	        console.log(data);
