@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "22e258afff45f02dc67a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b90ba1e1f4472762e867"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -23310,7 +23310,8 @@
 
 	      // console.log(location[0][0].results[0]);
 	      // console.log(location[0][0].results[0].geometry.location.lat);
-	      for (var i = 0; i < location.length; i += 3) {
+	      console.log(location.length);
+	      for (var i = 0; i < location.length; i += 1) {
 	        geocodeArray.push([location[i][0].results[0].geometry.location.lat, location[i][0].results[0].geometry.location.lng]);
 	      }
 	      console.log(geocodeArray);
