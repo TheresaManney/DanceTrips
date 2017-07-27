@@ -120,7 +120,7 @@ var TripListView = Backbone.View.extend({
         console.log("successful authorization for adding a trip");
         // console.log(this.model);
         var newTrip = new Trip(tripDetails);
-        newTrip.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips";
+        newTrip.url = "https://route.triptrackerapi.com/trips";
         newTrip.save(tripDetails, {
           success: function(data) {
             console.log("Trip created");

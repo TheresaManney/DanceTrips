@@ -6,7 +6,7 @@ import Traveler from '../models/traveler.js';
 
 var TravelerList = Backbone.Collection.extend({
   model: Traveler,
-  url: 'https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers'
+  url: 'https://route.triptrackerapi.com/travelers'
 });
 
 export default TravelerList;

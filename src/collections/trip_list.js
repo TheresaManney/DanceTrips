@@ -5,7 +5,7 @@ import Trip from '../models/trip.js';
 
 var TripList = Backbone.Collection.extend({
   model: Trip,
-  url: 'https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/trips'
+  url: 'https://route.triptrackerapi.com/trips'
 });
 
 export default TripList;

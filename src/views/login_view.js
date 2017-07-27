@@ -48,7 +48,7 @@ const LoginView = Backbone.View.extend({
       }
     };
     var loginTraveler = new Login();
-    loginTraveler.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/traveler_token";
+    loginTraveler.url = "https://route.triptrackerapi.com/traveler_token";
     loginTraveler.save(formDetails,  {
       success: function(data) {
 

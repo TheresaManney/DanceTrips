@@ -5,7 +5,7 @@ import Competition from '../models/competition.js';
 
 var CompetitionList = Backbone.Collection.extend({
   model: Competition,
-  url: 'https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/competitions'
+  url: 'https://route.triptrackerapi.com/competitions'
 });
 
 export default CompetitionList;

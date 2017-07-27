@@ -49,7 +49,7 @@ const SignupView = Backbone.View.extend({
 
     var that = this;
     var newTraveler = new Traveler(travelerDetails);
-    newTraveler.url = "https://example-env.fqbb3r2ykh.us-west-2.elasticbeanstalk.com/travelers";
+    newTraveler.url = "https://route.triptrackerapi.com/travelers";
     newTraveler.save(travelerDetails, {
       success: function(data) {
         console.log(data);
